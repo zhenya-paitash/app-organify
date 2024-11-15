@@ -7,7 +7,7 @@
 
 ## _About_
 
-> [!TODO]
+> [!important]
 >
 > Add description
 > Add links
@@ -17,11 +17,10 @@
 
 ## _Stack_  
 
-> [!TODO]
+> [!important]
 >
 > Edit stack badges
 
-[![Static Badge](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=FFFFFF&label=22.11.0&labelColor=339933&link=https%3A%2F%2Fnodejs.org%2F)](https://nodejs.org/)
 [![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.1.34&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
 [![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=14.2.18&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
@@ -33,24 +32,26 @@
 
 ## _Features_
 
-> [!TODO]
+> [!important]
 >
 > Add features
 
 ## _Installation guide_
 
-> [!TODO]
+> [!important]
 >
 > Add installation guide
 
 ## _Roadmap_
 
-> [!TODO]
+> [!important]
 >
 > Remove this after the project is complete
 
 - [x] docs: initial documentation
 - [x] init: project setup
+- [x] feat: add shadcn/ui component library
+- [x] chore: add shadcn/ui components
 
 ## _License_
 
