@@ -14,12 +14,7 @@
 
 **Name:** Task Tracker  
 **Year:** 2024  
-
-## _Stack_  
-
-> [!important]
->
-> Edit stack badges
+**Stack:** 
 
 [![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.1.34&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
@@ -52,6 +47,7 @@
 - [x] init: project setup
 - [x] feat: add shadcn/ui component library
 - [x] chore: add shadcn/ui components
+- [x] chore: fix linting issues in components
 
 ## _License_
 
