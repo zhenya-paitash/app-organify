@@ -1,4 +1,4 @@
-# **Task Tracker**
+# **Organify**
 
 <img src="preview/logo.webp" />
 
@@ -48,6 +48,7 @@
 - [x] feat: add shadcn/ui component library
 - [x] chore: add shadcn/ui components
 - [x] chore: fix linting issues in components
+- [x] feat: create auth pages
 
 ## _License_
 
