@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { Separator } from "@/components/ui/separator";
+import { SeparatorWithText } from "@/components/separator-with-text";
 
 const formSchema = z.object({
   email: z.string().trim().email(),
@@ -31,7 +31,7 @@ export const LoginCard = () => {
     <Card className="border-none shadow-none bg-inherit w-full max-w-[420px]">
       <CardHeader className="flex items-center justify-center text-center p-4">
         <CardTitle className="text-3xl p-4 font-bold">Welcome back</CardTitle>
-        <CardDescription className="text-gray-600 mb-8">Please enter your login details below to using the app.</CardDescription>
+        <CardDescription className="text-gray-600 pb-4">Please enter your login details below to using the app.</CardDescription>
       </CardHeader>
 
       <CardContent className="p-7">
@@ -60,7 +60,7 @@ export const LoginCard = () => {
         </Form>
       </CardContent>
 
-      <Separator />
+      <SeparatorWithText text="Or login with" />
 
       <CardContent className="grid grid-cols-1 gap-2 p-7 sm:grid-cols-2">
         <Button className="w-full" variant="secondary" size="sm" disabled={false}><FcGoogle className="size-5" />Sign in with Google</Button>
