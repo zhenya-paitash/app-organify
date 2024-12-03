@@ -12,19 +12,19 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { SeparatorWithText } from "@/components/separator-with-text";
 
-const formSchema = z.object({
-  email: z.string().trim().email(),
-  password: z.string().min(1, { message: "Required" }),
-});
+import { loginSchema } from "../schemas";
+import { useLogin } from "../api/use-login";
 
 export const LoginCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useLogin();
+
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
+  const onSubmit = (data: z.infer<typeof loginSchema>) => {
+    mutate({ json: data });
   }
 
   return (
