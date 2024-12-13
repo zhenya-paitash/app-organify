@@ -1,11 +1,15 @@
-# **Organify**
+<div align="center">
+  <img src="preview/logo.webp" width="100" alt="Organify Logo">
+  <h1>Organify</h1>
+  <h4><i>Own your time. We're here to help.</i></h4>
+  <a href="https://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/badge/MIT-3DA638?style=for-the-badge&label=license&link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fmit%2F"></a>
+  <img src="https://img.shields.io/badge/educational-ED7D31?style=for-the-badge&label=project&link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fmit%2F">
+  <img src="https://img.shields.io/badge/version-1.0.0-9cf?style=for-the-badge&label=version&link=https%3A%2F%2Fgithub.com%2F...%2Forganify">
+</div>
 
-**Organify** is a time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.  
+<br>
 
-<img src="preview/logo.webp" />
-
-[![Static Badge](https://img.shields.io/badge/MIT-3DA638?label=license&link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fmit%2F)](https://choosealicense.com/licenses/mit/)
-![Static Badge](https://img.shields.io/badge/educational-ED7D31?label=project&link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fmit%2F)
+**Organify** is a time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.
 
 ## _About_
 
@@ -26,6 +30,7 @@
 [![Static Badge](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&link=https%3A%2F%2Feslint.org%2F)](https://eslint.org/) 
 [![Static Badge](https://img.shields.io/badge/shadcn%2Fui-18181B?style=for-the-badge&link=https%3A%2F%2Fui.shadcn.com%2F)](https://ui.shadcn.com/) 
 [![Static Badge](https://img.shields.io/badge/zod-%233E67B1?style=for-the-badge&logo=zod&logoColor=FFFFFF&link=https%3A%2F%2Fzod.dev%2F)](https://zod.dev/) 
+[![Static Badge](https://img.shields.io/badge/appwrite-FD366E?style=for-the-badge&logo=appwrite&logoColor=FFFFFF&link=https%3A%2F%2Fappwrite.io%2F)](https://appwrite.io/)  
 
 ## _Features_
 
@@ -33,11 +38,46 @@
 >
 > Add features
 
-## _Installation guide_
+## _Installation_
 
 > [!important]
 >
-> Add installation guide
+> Add installation screenshots
+
+<details>
+    <summary>Настройка базы данных <a href="https://appwrite.io/">Appwrite</a></summary>
+    <br/>
+
+**Note**: настройку `Appwrite` для проекта на Next.js c SSR аутентификацией можно найти здесь https://appwrite.io/docs/tutorials/nextjs-ssr-auth/step-1
+
+1. Создать **аккаунт** на [Appwrite](https://appwrite.io/)
+
+2. Создать **проект**  
+<img src="preview/installation-2.webp" width="100%" alt="Appwrite project"><br/>
+
+3. Создать **ключи API** с привилегиями и добавить значения в `.env.local` файл  
+
+    - `NEXT_PUBLIC_APPWRITE_ENDPOINT` & `NEXT_PUBLIC_APPWRITE_PROJECT`
+    <img src="preview/installation-3-1.webp" width="100%" alt="Apprite project & Appwrite endpoint"><br/>
+
+    - `NEXT_APPWRITE_KEY`
+    <img src="preview/installation-3-2.webp" width="100%" alt="Appwrite api key"><br/>
+
+    - добавить значения в `.env.local`
+        ```env
+        ╭───────────────────────────────────────╮
+        │ .env.local                            │
+        │───────────────────────────────────────│
+        │  5 # DATABASE                         │
+        │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=     │
+        │  7 NEXT_PUBLIC_APPWRITE_PROJECT=      │
+        │  8 NEXT_PUBLIC_APPWRITE_DATABASE_ID=  │
+        │  9                                    │
+        │ 10 NEXT_APPWRITE_KEY=                 │
+        ╰───────────────────────────────────────╯
+        ```
+</details>
+
 
 ## _Roadmap_
 
@@ -45,15 +85,17 @@
 >
 > Remove this after the project is complete
 
-- [x] docs: initial documentation
-- [x] init: project setup
-- [x] feat: add shadcn/ui component library
-- [x] chore: add shadcn/ui components
-- [x] chore: fix linting issues in components
-- [x] feat: create auth pages
-- [x] style: refactor UI styles
-- [x] feat: api with Hono
-- [x] feat(api): add auth entities
+- [x] `docs`: initial documentation
+- [x] `init`: project setup
+- [x] `feat`: add shadcn/ui component library
+- [x] `chore`: add shadcn/ui components
+- [x] `chore`: fix linting issues in components
+- [x] `feat`: create auth pages
+- [x] `style`: refactor UI styles
+- [x] `feat`: api with Hono
+- [x] `feat(api)`: add auth entities
+- [x] `feat(database)`: configurate Appwrite as database
+- [ ] `feat(database)`: add session middleware
 
 ## _License_
 
