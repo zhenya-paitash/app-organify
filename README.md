@@ -95,7 +95,7 @@
 - [x] `feat`: api with Hono
 - [x] `feat(api)`: add auth entities
 - [x] `feat(database)`: configurate Appwrite as database
-- [ ] `feat(database)`: add session middleware
+- [x] `feat(database)`: add session middleware
 
 ## _License_
 
