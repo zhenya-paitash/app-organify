@@ -96,6 +96,7 @@
 - [x] `feat(api)`: add auth entities
 - [x] `feat(database)`: configurate Appwrite as database
 - [x] `feat(database)`: add session middleware
+- [x] `feet(auth)`: protect routes
 
 ## _License_
 
