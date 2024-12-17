@@ -1,30 +1,18 @@
-"use client";
+import { ThemeButton } from "@/components/theme-button";
+import { UserButton } from "@/features/auth/components/user-button";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { getCurrent } from "@/features/auth/actions";
+import { redirect } from "next/navigation";
 
-import { useCurrent } from "@/features/auth/api/use-current";
-import { Button } from "@/components/ui/button";
-import { useLogout } from "@/features/auth/api/use-logout";
+export default async function Home() {
+  const user = await getCurrent()
+  console.log(user);
+  if (!user) redirect("/login");
 
-export default function Home() {
-  const router = useRouter()
-  const { data, isLoading } = useCurrent()
-  const logout = useLogout()
-
-  useEffect(() => {
-    if (!data && !isLoading) router.push("/login");
-  }, [data]);
-
-  const handleLogout = () => {
-    logout.mutate()
-  }
-
-  if (isLoading) return;
   return (
-    <>
-      <Button onClick={handleLogout}>Loggout</Button>
-      {data && <p>{data.name}</p>}
-    </>
+    <main className="flex items-center justify-between p-4">
+      <ThemeButton />
+      <UserButton />
+    </main>
   );
 }

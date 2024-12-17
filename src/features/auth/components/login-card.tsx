@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,7 +18,7 @@ import { loginSchema } from "../schemas";
 import { useLogin } from "../api/use-login";
 
 export const LoginCard = () => {
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -40,7 +42,7 @@ export const LoginCard = () => {
             <FormField name="email" control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="Enter email address" />
+                  <Input {...field} type="email" placeholder="Enter email address" disabled={isPending} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -49,13 +51,13 @@ export const LoginCard = () => {
             <FormField name="password" control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="password" placeholder="Enter your password" />
+                  <Input {...field} type="password" placeholder="Enter your password" disabled={isPending} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )} />
 
-            <Button className="w-full" size="lg" disabled={false}>Sign In</Button>
+            <Button className="w-full" size="lg" disabled={isPending}>Sign In</Button>
           </form>
         </Form>
       </CardContent>
@@ -63,8 +65,8 @@ export const LoginCard = () => {
       <SeparatorWithText text="Or login with" />
 
       <CardContent className="grid grid-cols-1 gap-2 p-7 sm:grid-cols-2">
-        <Button className="w-full" variant="secondary" size="sm" disabled={false}><FcGoogle className="size-5" />Sign in with Google</Button>
-        <Button className="w-full" variant="secondary" size="sm" disabled={false}><FaGithub className="size-5" />Sign in with GitHub</Button>
+        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FcGoogle className="size-5" />Sign in with Google</Button>
+        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FaGithub className="size-5" />Sign in with GitHub</Button>
       </CardContent>
 
       <CardContent className="flex justify-center items-center text-center p-7">

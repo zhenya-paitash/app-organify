@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,7 +18,7 @@ import { registerSchema } from "../schemas";
 import { useRegister } from "../api/use-register";
 
 export const RegisterCard = () => {
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -45,7 +47,7 @@ export const RegisterCard = () => {
             <FormField name="name" control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="text" placeholder="Enter your name" />
+                  <Input {...field} type="text" placeholder="Enter your name" disabled={isPending} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -54,7 +56,7 @@ export const RegisterCard = () => {
             <FormField name="email" control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="email" placeholder="Enter email address" />
+                  <Input {...field} type="email" placeholder="Enter email address" disabled={isPending} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -63,13 +65,13 @@ export const RegisterCard = () => {
             <FormField name="password" control={form.control} render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} type="password" placeholder="Enter password" />
+                  <Input {...field} type="password" placeholder="Enter password" disabled={isPending} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )} />
 
-            <Button className="w-full" size="lg" disabled={false}>Create account</Button>
+            <Button className="w-full" size="lg" disabled={isPending}>Create account</Button>
           </form>
         </Form>
       </CardContent>
@@ -77,8 +79,8 @@ export const RegisterCard = () => {
       <SeparatorWithText text="Or register with" />
 
       <CardContent className="grid grid-cols-1 gap-2 p-7 sm:grid-cols-2">
-        <Button className="w-full" variant="secondary" size="sm" disabled={false}><FcGoogle className="size-5" />Google</Button>
-        <Button className="w-full" variant="secondary" size="sm" disabled={false}><FaGithub className="size-5" />GitHub</Button>
+        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FcGoogle className="size-5" />Google</Button>
+        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FaGithub className="size-5" />GitHub</Button>
       </CardContent>
 
       <CardContent className="flex justify-center items-center text-center p-7">
