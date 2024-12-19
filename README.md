@@ -97,6 +97,7 @@
 - [x] `feat(database)`: configurate Appwrite as database
 - [x] `feat(database)`: add session middleware
 - [x] `feet(auth)`: protect routes
+- [x] `feet`: add dashboard
 
 ## _License_
 
