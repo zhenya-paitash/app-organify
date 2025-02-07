@@ -1,4 +1,5 @@
 import { getCurrent } from "@/features/auth/actions";
+import { CreateWorkspaceForm } from "@/features/workspaces/components/create-workspace-form";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
@@ -6,8 +7,12 @@ export default async function Home() {
   if (!user) redirect("/login");
 
   return (
-    <main className="flex items-center justify-between p-4">
-      Home page
-    </main>
+    <div>
+      <CreateWorkspaceForm />
+    </div>
+
+    // <main className="flex items-center justify-between p-4">
+    //   Home page
+    // </main>
   );
 }
