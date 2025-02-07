@@ -80,21 +80,34 @@
     - copy `NEXT_PUBLIC_APPWRITE_WORKSPACES_ID`
     <img src="preview/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
 
-6. Add the following values to `@/.env.local` file
+6. Create **storage** 
+
+    - **Appwrite** > `<your organization>` > `<your project>` > `Storage` > `Create Storage`
+    <img src="preview/database-6-1.webp" width="100%" alt="Appwrite storage images"><br/>
+
+    - copy `NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID`
+    <img src="preview/database-6-2.webp" width="100%" alt="Appwrite storage images bucket id"><br/>
+
+    - configurate settings 
+    <img src="preview/database-6-3.webp" width="100%" alt="Appwrite storage images permissions"><br/>
+    <img src="preview/database-6-4.webp" width="100%" alt="Appwrite storage images size & filetypes"><br/>
+
+7. Add the following values to `@/.env.local` file
 
     ```env
-    ╭───────────────────────────────────────╮
-    │ .env.local                            │
-    │───────────────────────────────────────│
-    │  5 # DATABASE                         │
-    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=     │
-    │  7 NEXT_PUBLIC_APPWRITE_PROJECT=      │
-    │  8                                    │
-    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=  │
-    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=│
-    │ 11                                    │
-    │ 12 NEXT_APPWRITE_KEY=                 │
-    ╰───────────────────────────────────────╯
+    ╭───────────────────────────────────────────╮
+    │ .env.local                                │
+    │───────────────────────────────────────────│
+    │  5 # DATABASE                             │
+    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=         │
+    │  7 NEXT_PUBLIC_APPWRITE_PROJECT=          │
+    │  8                                        │
+    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=      │
+    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=    │
+    │ 11 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID= │
+    │ 12                                        │
+    │ 13 NEXT_APPWRITE_KEY=                     │
+    ╰───────────────────────────────────────────╯
     ```
 
 </details>
@@ -120,6 +133,7 @@
 - [x] `feet(auth)`: protect routes
 - [x] `feet`: add dashboard
 - [x] `feet(dashboard)`: add workspace forms
+- [x] `feet(workspaces)`: add image upload feature
 - [ ] `style(dashboard)`: refactor dashboard UI
 
 ## _License_
