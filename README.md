@@ -19,7 +19,7 @@
 **Year:** 2024  
 **Stack:** 
 
-[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.1.38&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
+[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.2&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
 [![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=14.2.18&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
 [![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^18&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
@@ -53,29 +53,50 @@
 1. Создать **аккаунт** на [Appwrite](https://appwrite.io/)
 
 2. Создать **проект**  
-<img src="preview/installation-2.webp" width="100%" alt="Appwrite project"><br/>
+<img src="preview/database-2.webp" width="100%" alt="Appwrite project"><br/>
+
 
 3. Создать **ключи API** с привилегиями и добавить значения в `.env.local` файл  
 
-    - `NEXT_PUBLIC_APPWRITE_ENDPOINT` & `NEXT_PUBLIC_APPWRITE_PROJECT`
-    <img src="preview/installation-3-1.webp" width="100%" alt="Apprite project & Appwrite endpoint"><br/>
+    - copy `NEXT_PUBLIC_APPWRITE_ENDPOINT` & `NEXT_PUBLIC_APPWRITE_PROJECT`
+    <img src="preview/database-3-1.webp" width="100%" alt="Apprite project & Appwrite endpoint"><br/>
 
-    - `NEXT_APPWRITE_KEY`
-    <img src="preview/installation-3-2.webp" width="100%" alt="Appwrite api key"><br/>
+    - copy `NEXT_APPWRITE_KEY`
+    <img src="preview/database-3-2.webp" width="100%" alt="Appwrite api key"><br/>
 
-    - добавить значения в `.env.local`
-        ```env
-        ╭───────────────────────────────────────╮
-        │ .env.local                            │
-        │───────────────────────────────────────│
-        │  5 # DATABASE                         │
-        │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=     │
-        │  7 NEXT_PUBLIC_APPWRITE_PROJECT=      │
-        │  8 NEXT_PUBLIC_APPWRITE_DATABASE_ID=  │
-        │  9                                    │
-        │ 10 NEXT_APPWRITE_KEY=                 │
-        ╰───────────────────────────────────────╯
-        ```
+4. Create **database**
+
+    - **Appwrite** > `<your organization>` > `<your project>` > `Databases` > `Create Database`
+
+    - copy `NEXT_PUBLIC_APPWRITE_DATABASE_ID`
+    <img src="preview/database-4-1.webp" width="100%" alt="Appwrite database id"><br/>
+
+5. Create **collection**
+
+    - **Appwrite** > `<your organization>` > `<your project>` > `Databases` > `<your database>` > `Collections` > `Create collection`
+
+    - create `workspaces` collection
+
+    - copy `NEXT_PUBLIC_APPWRITE_WORKSPACES_ID`
+    <img src="preview/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
+
+6. Add the following values to `@/.env.local` file
+
+    ```env
+    ╭───────────────────────────────────────╮
+    │ .env.local                            │
+    │───────────────────────────────────────│
+    │  5 # DATABASE                         │
+    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=     │
+    │  7 NEXT_PUBLIC_APPWRITE_PROJECT=      │
+    │  8                                    │
+    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=  │
+    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=│
+    │ 11                                    │
+    │ 12 NEXT_APPWRITE_KEY=                 │
+    ╰───────────────────────────────────────╯
+    ```
+
 </details>
 
 
@@ -98,6 +119,8 @@
 - [x] `feat(database)`: add session middleware
 - [x] `feet(auth)`: protect routes
 - [x] `feet`: add dashboard
+- [x] `feet(dashboard)`: add workspace forms
+- [ ] `style(dashboard)`: refactor dashboard UI
 
 ## _License_
 
