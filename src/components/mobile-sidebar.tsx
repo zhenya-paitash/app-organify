@@ -6,7 +6,7 @@ import { MenuIcon } from "lucide-react";
 
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { Sidebar } from "./sidepar";
+import { Sidebar } from "./sidebar";
 
 export const MobileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
