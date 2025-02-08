@@ -76,9 +76,22 @@
     - **Appwrite** > `<your organization>` > `<your project>` > `Databases` > `<your database>` > `Collections` > `Create collection`
 
     - create `workspaces` collection
+        - attribute `name` type `string` size `256` `required`
+        - attribute `userId` type `string` size `100` `required`
+        - attribute `inviteCode` type `string` size `10` `required`
+        - attribute `imageUrl` type `string` size `1400000`
 
-    - copy `NEXT_PUBLIC_APPWRITE_WORKSPACES_ID`
-    <img src="preview/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
+        - copy `NEXT_PUBLIC_APPWRITE_WORKSPACES_ID`
+        <img src="preview/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
+
+    - create `members` collection
+        - attribute `userId` type `string` size `50` `required`
+        - attribute `workspaceId` type `string` size `50` `required`
+        - attribute `role` type `enum` elements `ADMIN MEMBERS` `required`
+
+        - settings > permissions > add `All users` > create ✓ read ✓ update ✓ delete ✓
+
+        - copy `NEXT_PUBLIC_APPWRITE_MEMBERS_ID`
 
 6. Create **storage** 
 
@@ -104,9 +117,10 @@
     │  8                                        │
     │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=      │
     │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=    │
-    │ 11 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID= │
-    │ 12                                        │
-    │ 13 NEXT_APPWRITE_KEY=                     │
+    │ 11 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=       │
+    │ 12 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID= │
+    │ 13                                        │
+    │ 14 NEXT_APPWRITE_KEY=                     │
     ╰───────────────────────────────────────────╯
     ```
 
@@ -135,9 +149,11 @@
 - [x] `feet(dashboard)`: add workspace forms
 - [x] `feet(workspaces)`: add image upload feature
 - [x] `feet(workspaces)`: create workspace selector
-- [ ] `feet(workspaces)`: create workspace users
+- [x] `feet(workspaces)`: create workspace members
 - [ ] `feet`: add responsive modal windows
 - [ ] `style(dashboard)`: refactor dashboard UI
+- [ ] `docs`: create seed file for database
+
 
 ## _License_
 
