@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/sidepar";
+import { Sidebar } from "@/components/sidebar";
 import { Navbar } from "@/components/navbar";
 
 interface DashboardLayoutProps {

@@ -134,6 +134,9 @@
 - [x] `feet`: add dashboard
 - [x] `feet(dashboard)`: add workspace forms
 - [x] `feet(workspaces)`: add image upload feature
+- [x] `feet(workspaces)`: create workspace selector
+- [ ] `feet(workspaces)`: create workspace users
+- [ ] `feet`: add responsive modal windows
 - [ ] `style(dashboard)`: refactor dashboard UI
 
 ## _License_

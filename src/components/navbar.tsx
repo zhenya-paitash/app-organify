@@ -1,6 +1,6 @@
 import { UserButton } from "@/features/auth/components/user-button";
 import { ThemeButton } from "@/components/theme-button";
-import { MobileSidebar } from "./mobile-sidepar";
+import { MobileSidebar } from "./mobile-sidebar";
 
 export const Navbar = () => {
   return (
