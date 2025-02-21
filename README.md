@@ -150,7 +150,7 @@
 - [x] `feet(workspaces)`: add image upload feature
 - [x] `feet(workspaces)`: create workspace selector
 - [x] `feet(workspaces)`: create workspace members
-- [ ] `feet`: add responsive modal windows
+- [x] `feet(workspaces)`: add create workspace responsive modal
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
