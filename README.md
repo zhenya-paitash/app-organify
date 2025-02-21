@@ -151,6 +151,7 @@
 - [x] `feet(workspaces)`: create workspace selector
 - [x] `feet(workspaces)`: create workspace members
 - [x] `feet(workspaces)`: add create workspace responsive modal
+- [x] `feet(workspaces)`: create standalone create workspace page
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
