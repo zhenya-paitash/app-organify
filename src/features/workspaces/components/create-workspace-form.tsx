@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -64,7 +65,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   }
 
   return (
-    <Card className="w-full h-full border-none shadow-none">
+    <Card className="w-full h-full border-none shadow-none bg-background">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">New Workspace</CardTitle>
       </CardHeader>
@@ -148,7 +149,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
               <Separator className="py-7" />
 
               <div className="flex items-cdenter justify-between">
-                <Button type="button" variant="secondary" size="lg" onClick={onCancel} disabled={isPending}>Cancel</Button>
+                <Button type="button" variant="secondary" size="lg" onClick={onCancel} disabled={isPending} className={cn(!onCancel && "invisible")}>Cancel</Button>
                 <Button type="submit" variant="primary" size="lg" disabled={isPending}>Create Workspace</Button>
               </div>
 

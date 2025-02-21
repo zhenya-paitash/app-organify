@@ -1,12 +1,13 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { getCurrent } from "@/features/auth/querys";
 
-const WorkspaceIdPage = () => {
-  const workspaceId = useWorkspaceId();
+const WorkspaceIdPage = async () => {
+  const user = await getCurrent();
+  if (!user) redirect("/login");
 
   return (
-    <div>Workspace {workspaceId} page</div>
+    <div>Workspace page</div>
   )
 }
 
