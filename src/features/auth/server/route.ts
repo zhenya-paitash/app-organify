@@ -11,7 +11,7 @@ import { loginSchema, registerSchema } from "../schemas";
 
 const app = new Hono()
   /**
-   * @route: /api/auth/v0/current
+   * @route: /api/auth/v1/current
    * @method: GET
    * @description: Retrieve the currently authenticated user's information.
    * @responses: 
@@ -24,7 +24,7 @@ const app = new Hono()
   })
 
   /**
-   * @route: /api/auth/v0/login
+   * @route: /api/auth/v1/login
    * @method: POST
    * @description: Authenticate a user and return a session token.
    * @requestBody: 
@@ -51,7 +51,7 @@ const app = new Hono()
   })
 
   /**
-   * @route: /api/auth/v0/register
+   * @route: /api/auth/v1/register
    * @method: POST
    * @description: Create a new user account and return a session token.
    * @requestBody: 
@@ -80,7 +80,7 @@ const app = new Hono()
   })
 
   /**
-   * @route: /api/auth/v0/logout
+   * @route: /api/auth/v1/logout
    * @method: POST
    * @description: Revoke the user's active session, removing the authentication cookie and requiring re-authentication for future requests.
    * @responses: 

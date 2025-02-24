@@ -1,8 +1,15 @@
 import { cookies } from "next/headers";
 import { Account, Client, Databases, Models, Query } from "node-appwrite";
 
+import { getMember } from "@/features/members/utils";
 import { AUTH_COOKIE } from "@/features/auth/constants";
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
+
+import { TWorkspace } from "./types";
+
+interface GetWorkspaceBytIdProps {
+  workspaceId: string;
+}
 
 export const getWorkspaces = async (): Promise<Models.DocumentList<Models.Document>> => {
   const workspaceEmptyState: Models.DocumentList<Models.Document> = { documents: [], total: 0, }
@@ -35,3 +42,34 @@ export const getWorkspaces = async (): Promise<Models.DocumentList<Models.Docume
     return workspaceEmptyState;
   }
 }
+
+export const getWorkspaceById = async ({ workspaceId }: GetWorkspaceBytIdProps): Promise<TWorkspace | null> => {
+  try {
+    const client = new Client()
+      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
+      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
+
+    const session = cookies().get(AUTH_COOKIE)?.value;
+    if (!session) return null;
+
+    client.setSession(session);
+    const account = new Account(client);
+    const user = await account.get();
+    const databases = new Databases(client);
+
+    const member = getMember({
+      databases,
+      userId: user.$id,
+      workspaceId,
+    });
+    if (!member) return null;
+
+    const workspace = await databases.getDocument<TWorkspace>(DATABASE_ID, WORKSPACES_ID, workspaceId);
+
+    return workspace;
+  } catch (err: any) {
+    console.error(err);
+    return null;
+  }
+}
+
