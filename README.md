@@ -19,7 +19,7 @@
 **Year:** 2024  
 **Stack:** 
 
-[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.2&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
+[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.3&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
 [![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=14.2.18&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
 [![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^18&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
@@ -152,6 +152,7 @@
 - [x] `feet(workspaces)`: create workspace members
 - [x] `feet(workspaces)`: add create workspace responsive modal
 - [x] `feet(workspaces)`: create standalone create workspace page
+- [x] `feet(workspaces)`: build workspace settings
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

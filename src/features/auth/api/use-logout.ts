@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 import { client } from "@/lib/rpc";
 
-type ResponseType = InferResponseType<typeof client.api.v0.auth.logout["$post"]>;
+type ResponseType = InferResponseType<typeof client.api.v1.auth.logout["$post"]>;
 
 export const useLogout = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ export const useLogout = () => {
 
   const mutation = useMutation<ResponseType, Error>({
     mutationFn: async (): Promise<ResponseType> => {
-      const response = await client.api.v0.auth.logout["$post"]();
+      const response = await client.api.v1.auth.logout["$post"]();
       if (!response.ok) throw new Error("Failed to logout");
 
       return await response.json();
