@@ -1,11 +1,10 @@
-import { cookies } from "next/headers";
-import { Account, Client, Databases, Models, Query } from "node-appwrite";
+import { Models, Query } from "node-appwrite";
 
 import { getMember } from "@/features/members/utils";
-import { AUTH_COOKIE } from "@/features/auth/constants";
 import { DATABASE_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
 import { TWorkspace } from "./types";
+import { createSessionClient } from "@/lib/appwrite";
 
 interface GetWorkspaceBytIdProps {
   workspaceId: string;
@@ -15,18 +14,9 @@ export const getWorkspaces = async (): Promise<Models.DocumentList<Models.Docume
   const workspaceEmptyState: Models.DocumentList<Models.Document> = { documents: [], total: 0, }
 
   try {
-    const client = new Client()
-      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
+    const { account, databases } = await createSessionClient();
 
-    const session = cookies().get(AUTH_COOKIE)?.value;
-    if (!session) return workspaceEmptyState;
-
-    client.setSession(session);
-    const account = new Account(client);
     const user = await account.get();
-    const databases = new Databases(client);
-
     const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [Query.equal("userId", user.$id)])
     if (members.total === 0) return workspaceEmptyState;
 
@@ -45,18 +35,9 @@ export const getWorkspaces = async (): Promise<Models.DocumentList<Models.Docume
 
 export const getWorkspaceById = async ({ workspaceId }: GetWorkspaceBytIdProps): Promise<TWorkspace | null> => {
   try {
-    const client = new Client()
-      .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-      .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
+    const { account, databases } = await createSessionClient();
 
-    const session = cookies().get(AUTH_COOKIE)?.value;
-    if (!session) return null;
-
-    client.setSession(session);
-    const account = new Account(client);
     const user = await account.get();
-    const databases = new Databases(client);
-
     const member = getMember({
       databases,
       userId: user.$id,
