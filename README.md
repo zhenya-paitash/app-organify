@@ -154,6 +154,7 @@
 - [x] `feet(workspaces)`: create standalone create workspace page
 - [x] `feet(workspaces)`: build workspace settings
 - [x] `refactor`: refactor queries 
+- [x] `feet(workspaces)`: delete workspace
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
