@@ -155,6 +155,7 @@
 - [x] `feet(workspaces)`: build workspace settings
 - [x] `refactor`: refactor queries 
 - [x] `feet(workspaces)`: delete workspace
+- [x] `feet(workspaces)`: reset invite code
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
