@@ -1,7 +1,7 @@
 import "server-only";
 
 import { cookies } from "next/headers";
-import { Client, Account, Databases } from "node-appwrite";
+import { Client, Account, Databases, Users } from "node-appwrite";
 
 import { AUTH_COOKIE } from "@/features/auth/constants";
 
@@ -12,6 +12,7 @@ interface CreateSessionClient {
 
 interface CreateAdminClient {
   readonly account: Account;
+  readonly users: Users;
 }
 
 export async function createSessionClient(): Promise<CreateSessionClient> {
@@ -38,5 +39,6 @@ export async function createAdminClient(): Promise<CreateAdminClient> {
 
   return {
     get account() { return new Account(client) },
+    get users() { return new Users(client) }
   }
 }

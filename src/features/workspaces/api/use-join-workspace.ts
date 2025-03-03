@@ -14,14 +14,15 @@ export const useJoinWorkspace = () => {
     mutationFn: async ({ param, json }): Promise<ResponseType> => {
       const response = await client.api.v1.workspaces[":workspaceId"]["join"]["$post"]({ param, json });
       if (!response.ok) throw new Error("Failed to join workspace");
-
       return await response.json();
     },
+
     onSuccess: ({ data }) => {
       toast.success("You joined the workspace");
       queryClient.invalidateQueries({ queryKey: ["workspaces"] });
       queryClient.invalidateQueries({ queryKey: ["workspaces", data.$id] });
     },
+
     onError: () => {
       toast.error("Failed to reset join workspace");
     },

@@ -14,13 +14,14 @@ export const useCreateWorkspace = () => {
     mutationFn: async ({ form }): Promise<ResponseType> => {
       const response = await client.api.v1.workspaces["$post"]({ form });
       if (!response.ok) throw new Error("Failed to create workspace");
-
       return await response.json();
     },
+
     onSuccess: () => {
       toast.success("Workspace created");
       queryClient.invalidateQueries({ queryKey: ["workspaces"] });
     },
+
     onError: () => {
       toast.error("Failed to create workspace");
     },
