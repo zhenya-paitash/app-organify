@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { RiAddCircleFill } from "react-icons/ri";
+import { IoIosAdd } from "react-icons/io";
 
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { WorkspaceAvatar } from "@/features/workspaces/components/workspace-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspaces-modal";
+import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
 
 import {
   Select,
@@ -30,7 +30,7 @@ export const WorkspaceSwitcher = () => {
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
         <p className="text.xs uppercase text-foreground/50">Workspaces</p>
-        <RiAddCircleFill onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
+        <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
       </div>
 
       <Select onValueChange={onSelectWorkspace} value={workspaceId}>
