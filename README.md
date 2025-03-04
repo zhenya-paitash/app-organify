@@ -55,7 +55,6 @@
 2. Создать **проект**  
 <img src="preview/database-2.webp" width="100%" alt="Appwrite project"><br/>
 
-
 3. Создать **ключи API** с привилегиями и добавить значения в `.env.local` файл  
 
     - copy `NEXT_PUBLIC_APPWRITE_ENDPOINT` & `NEXT_PUBLIC_APPWRITE_PROJECT`
@@ -66,14 +65,14 @@
 
 4. Create **database**
 
-    - **Appwrite** > `<your organization>` > `<your project>` > `Databases` > `Create Database`
+    - **Appwrite** > `<your organization>` > `<your project>` > **Databases** > **Create Database**
 
     - copy `NEXT_PUBLIC_APPWRITE_DATABASE_ID`
     <img src="preview/database-4-1.webp" width="100%" alt="Appwrite database id"><br/>
 
 5. Create **collection**
 
-    - **Appwrite** > `<your organization>` > `<your project>` > `Databases` > `<your database>` > `Collections` > `Create collection`
+    - **Appwrite** > `<your organization>` > `<your project>` > **Databases** > `<your database>` > **Collections** > **Create collection**
 
     - create `workspaces` collection
         - attribute `name` type `string` size `256` `required`
@@ -93,9 +92,18 @@
 
         - copy `NEXT_PUBLIC_APPWRITE_MEMBERS_ID`
 
+    - create `projects` collection
+        - attribute `name` type `string` size `256` `required`
+        - attribute `workspaceId` type `string` size `50` `required`
+        - attribute `imageUrl` type `string` size `1400000`
+
+        - settings > permissions > add `All users` > create ✓ read ✓ update ✓ delete ✓
+
+        - copy `NEXT_PUBLIC_APPWRITE_PROJECTS_ID`
+
 6. Create **storage** 
 
-    - **Appwrite** > `<your organization>` > `<your project>` > `Storage` > `Create Storage`
+    - **Appwrite** > `<your organization>` > `<your project>` > **Storage** > **Create Storage**
     <img src="preview/database-6-1.webp" width="100%" alt="Appwrite storage images"><br/>
 
     - copy `NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID`
@@ -108,20 +116,25 @@
 7. Add the following values to `@/.env.local` file
 
     ```env
-    ╭───────────────────────────────────────────╮
-    │ .env.local                                │
-    │───────────────────────────────────────────│
-    │  5 # DATABASE                             │
-    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=         │
-    │  7 NEXT_PUBLIC_APPWRITE_PROJECT=          │
-    │  8                                        │
-    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=      │
-    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=    │
-    │ 11 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=       │
-    │ 12 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID= │
-    │ 13                                        │
-    │ 14 NEXT_APPWRITE_KEY=                     │
-    ╰───────────────────────────────────────────╯
+    ╭────────────────────────────────────────────────────────────────╮
+    │ .env.local                                                     │
+    │────────────────────────────────────────────────────────────────│
+    │  1 # APP                                                       │
+    │  2 NEXT_PUBLIC_APP_URL=http://localhost:3000                   │
+    │  3                                                             │
+    │  4                                                             │
+    │  5 # DATABASE                                                  │
+    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1  │
+    │  7 NEXT_PUBLIC_APPWRITE_PROJECT=                               │
+    │  8                                                             │
+    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=                           │
+    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=                         │
+    │ 11 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=                            │
+    │ 12 NEXT_PUBLIC_APPWRITE_PROJECTS_ID=                           │
+    │ 13 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=                      │
+    │ 14                                                             │
+    │ 15 NEXT_APPWRITE_KEY=                                          │
+    ╰────────────────────────────────────────────────────────────────╯
     ```
 
 </details>
@@ -158,6 +171,7 @@
 - [x] `feet(workspaces)`: reset invite code
 - [x] `feet(workspaces)`: invite members to workspace
 - [x] `feet(workspaces)`: delete members from workspace
+- [x] `feet(workspaces)`: add workspace projects
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

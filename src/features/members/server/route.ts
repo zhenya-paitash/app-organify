@@ -3,10 +3,10 @@ import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import { Query } from "node-appwrite";
 
+import { DATABASE_ID, MEMBERS_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { createAdminClient } from "@/lib/appwrite";
 
-import { DATABASE_ID, MEMBERS_ID } from "@/config";
 import { getMember } from "../utils";
 import { MemberRole } from "../types";
 
