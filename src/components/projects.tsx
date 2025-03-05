@@ -14,7 +14,6 @@ import { useCreateProjectModal } from "@/features/projects/hooks/use-create-proj
 export const Projects = () => {
   const pathname = usePathname();
   const workspaceId = useWorkspaceId();
-  const projcetId = null; // TODO: create hook
   const { data } = useGetProjects({ workspaceId });
   const { open } = useCreateProjectModal();
 

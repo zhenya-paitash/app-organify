@@ -19,7 +19,7 @@ export const MobileSidebar = () => {
 
   return (
     <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger className="md:hidden hover:opacity-75 transition" asChild>
+      <SheetTrigger className="lg:hidden hover:opacity-75 transition" asChild>
         <Button variant="secondary" className="lg:hidden">
           <MenuIcon className="size-4 text-neutral-500" />
         </Button>

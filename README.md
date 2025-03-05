@@ -172,6 +172,8 @@
 - [x] `feet(workspaces)`: invite members to workspace
 - [x] `feet(workspaces)`: delete members from workspace
 - [x] `feet(workspaces)`: add workspace projects
+- [x] `feet(projects)`: create project settings
+- [ ] `feet`: create task api
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
