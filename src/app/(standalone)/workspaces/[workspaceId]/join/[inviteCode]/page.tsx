@@ -16,7 +16,7 @@ const WorkspaceByIdJoinPage = async ({ params }: WorkspaceByIdJoinPageProps) => 
   if (!user) redirect("/login");
 
   const initialValues = await getWorkspaceInfo({ workspaceId: params.workspaceId });
-  if (!initialValues) redirect("/");
+  // if (!initialValues) redirect("/");
 
   return (
     <div className="w-full lg:max-w-xl">

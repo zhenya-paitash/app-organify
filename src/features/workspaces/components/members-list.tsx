@@ -19,7 +19,7 @@ import { useConfirm } from "@/hooks/use-confirm";
 
 export const MembersList = () => {
   const workspaceId = useWorkspaceId();
-  const { data } = useGetMembers({ workspaceId });
+  const { data, isLoading } = useGetMembers({ workspaceId });
   const { mutate: updateMember, isPending: isUpdatingMember } = useUpdateMember();
   const { mutate: deleteMember, isPending: isDeletingMember } = useDeleteMember();
   const [DeleteMemberDialog, confirmDeleteMember] = useConfirm({ title: "Delete member", message: "Are you sure you want to delete this member?", variant: "destructive" });
@@ -54,7 +54,7 @@ export const MembersList = () => {
       <div className="px-7"><Separator /></div>
 
       <CardContent className="p-7">
-        {data?.documents.map((member, idx) => (
+        {isLoading ? <p>wait a moment...</p> : data?.documents.map((member, idx) => (
           <Fragment key={member.$id}>
             <div className="flex items-center gap-2">
               <MemberAvatar className="size-10" name={member.name} fallbackClassName="text-lg" />
