@@ -11,6 +11,7 @@ import { getMember } from "../utils";
 import { MemberRole } from "../types";
 
 const app = new Hono()
+
   .get("/", sessionMiddleware, zValidator("query", z.object({ workspaceId: z.string() })), async c => {
     const { users } = await createAdminClient();
     const databases = c.get("databases");
@@ -27,6 +28,7 @@ const app = new Hono()
 
     return c.json({ data: { ...members, documents: membersPopulate } });
   })
+
   .delete("/:memberId", sessionMiddleware, async c => {
     const { memberId } = c.req.param();
     const user = c.get("user");
@@ -43,6 +45,7 @@ const app = new Hono()
 
     return c.json({ data: { $id: memberId } });
   })
+
   .patch("/:memberId", sessionMiddleware, zValidator("json", z.object({ role: z.nativeEnum(MemberRole) })), async c => {
     const { memberId } = c.req.param();
     const { role } = c.req.valid("json");

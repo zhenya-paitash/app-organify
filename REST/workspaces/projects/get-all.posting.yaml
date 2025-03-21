@@ -1,0 +1,7 @@
+name: all
+description: get all projects in workspace by workspaceId
+method: GET
+url: $NEXT_PUBLIC_APP_URL/api/v1/projects
+params:
+- name: workspaceId
+  value: ***
