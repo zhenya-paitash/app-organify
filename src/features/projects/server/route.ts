@@ -11,6 +11,7 @@ import { createProjectSchema, updateProjectSchema } from "../schemas";
 import { TProject } from "../types";
 
 const app = new Hono()
+
   .get("/", sessionMiddleware, zValidator("query", z.object({ workspaceId: z.string() })), async c => {
     const user = c.get("user");
     const databases = c.get("databases");
@@ -27,6 +28,7 @@ const app = new Hono()
 
     return c.json({ data: projects });
   })
+
   .post("/", sessionMiddleware, zValidator("form", createProjectSchema), async c => {
     const databases = c.get("databases");
     const storage = c.get("storage");
@@ -65,6 +67,7 @@ const app = new Hono()
 
     return c.json({ data: project });
   })
+
   .patch("/:projectId", sessionMiddleware, zValidator("form", updateProjectSchema), async c => {
     const databases = c.get("databases");
     const storage = c.get("storage");
@@ -108,6 +111,7 @@ const app = new Hono()
 
     return c.json({ data: project });
   })
+
   .delete("/:projectId", sessionMiddleware, async c => {
     const databases = c.get("databases");
     const user = c.get("user");

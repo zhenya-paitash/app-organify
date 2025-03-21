@@ -19,7 +19,7 @@
 **Year:** 2024  
 **Stack:** 
 
-[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.4&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
+[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.5&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
 [![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=14.2.18&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
 [![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^18&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
@@ -101,6 +101,18 @@
 
         - copy `NEXT_PUBLIC_APPWRITE_PROJECTS_ID`
 
+    - create `tasks` collection
+        - attribute `name` type `string` size `256` `required`
+        - attribute `status` type `enum` elements `BACKLOG DELAY TODO IN_PROGRESS IN_REVIEW DONE` `required`
+        - attribute `dueDate` type `datetime` `required`
+        - attribute `position` type `integer` min `1000` max `1000000` `required`
+        - attribute `workspaceId` type `string` size `50` `required`
+        - attribute `projectId` type `string` size `50` `required`
+        - attribute `executorId` type `string` size `50` `required`
+        - attribute `description` type `string` size `2048`
+
+        - copy `NEXT_PUBLIC_APPWRITE_TASKS_ID`
+
 6. Create **storage** 
 
     - **Appwrite** > `<your organization>` > `<your project>` > **Storage** > **Create Storage**
@@ -131,9 +143,10 @@
     │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=                         │
     │ 11 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=                            │
     │ 12 NEXT_PUBLIC_APPWRITE_PROJECTS_ID=                           │
-    │ 13 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=                      │
-    │ 14                                                             │
-    │ 15 NEXT_APPWRITE_KEY=                                          │
+    │ 13 NEXT_PUBLIC_APPWRITE_TASKS_ID=                              │
+    │ 14 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=                      │
+    │ 15                                                             │
+    │ 16 NEXT_APPWRITE_KEY=                                          │
     ╰────────────────────────────────────────────────────────────────╯
     ```
 
@@ -173,7 +186,7 @@
 - [x] `feet(workspaces)`: delete members from workspace
 - [x] `feet(workspaces)`: add workspace projects
 - [x] `feet(projects)`: create project settings
-- [ ] `feet`: create task api
+- [x] `feet`: create task api
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

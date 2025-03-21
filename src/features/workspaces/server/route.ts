@@ -14,6 +14,7 @@ import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
 import { TWorkspace } from "../types";
 
 const app = new Hono()
+
   .get("/", sessionMiddleware, async c => {
     const user = c.get("user");
     const databases = c.get("databases");
@@ -31,6 +32,7 @@ const app = new Hono()
 
     return c.json({ data: workspaces });
   })
+
   .post("/", zValidator("form", createWorkspaceSchema), sessionMiddleware, async c => {
     const databases = c.get("databases");
     const storage = c.get("storage");
@@ -79,6 +81,7 @@ const app = new Hono()
 
     return c.json({ data: workspace });
   })
+
   .patch("/:workspaceId", sessionMiddleware, zValidator("form", updateWorkspaceSchema), async c => {
     const databases = c.get("databases");
     const storage = c.get("storage");
@@ -120,6 +123,7 @@ const app = new Hono()
 
     return c.json({ data: workspace });
   })
+
   .delete("/:workspaceId", sessionMiddleware, async c => {
     const databases = c.get("databases");
     const user = c.get("user");
@@ -137,6 +141,7 @@ const app = new Hono()
 
     return c.json({ data: { $id: workspaceId } });
   })
+
   .post("/:workspaceId/reset-invitecode", sessionMiddleware, async c => {
     const databases = c.get("databases");
     const user = c.get("user");
@@ -152,6 +157,7 @@ const app = new Hono()
 
     return c.json({ data: workspace });
   })
+
   .post("/:workspaceId/join", sessionMiddleware, zValidator("json", z.object({ inviteCode: z.string() })), async c => {
     const { workspaceId } = c.req.param();
     const { inviteCode } = c.req.valid("json");

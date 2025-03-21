@@ -10,6 +10,7 @@ import { AUTH_COOKIE, COOKIE_MAX_AGE } from "../constants";
 import { loginSchema, registerSchema } from "../schemas";
 
 const app = new Hono()
+
   /**
    * @route: /api/auth/v1/current
    * @method: GET
@@ -95,5 +96,6 @@ const app = new Hono()
 
     return c.json({ success: true });
   })
+  ;
 
 export default app;
