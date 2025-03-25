@@ -1,10 +1,16 @@
+"use client";
+
 import { TiPlus } from "react-icons/ti";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 
+import { useCreateTaskModal } from "../hooks/use-create-task-modal";
+
 export const TaskViewSwitcher = () => {
+  const { open } = useCreateTaskModal();
+
   return (
     <Tabs className="w-full flex-1 border rounded-lg">
       <div className="h-full flex flex-col overflow-auto p-4">
@@ -14,7 +20,7 @@ export const TaskViewSwitcher = () => {
             <TabsTrigger className="w-full h-8 lg:w-auto" value="kanban">Kanban</TabsTrigger>
             <TabsTrigger className="w-full h-8 lg:w-auto" value="calendar">Calendar</TabsTrigger>
           </TabsList>
-          <Button className="w-full lg:w-auto" size="xs"><TiPlus className="size-4 mr-2" />New</Button>
+          <Button onClick={open} className="w-full lg:w-auto" size="xs"><TiPlus className="size-4 mr-2" />New</Button>
         </div>
         <Separator className="my-4" />
         <h3 className="w-full text-center">Data Filters</h3>

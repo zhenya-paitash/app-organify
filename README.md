@@ -111,6 +111,8 @@
         - attribute `executorId` type `string` size `50` `required`
         - attribute `description` type `string` size `2048`
 
+        - settings > permissions > add `All users` > create ✓ read ✓ update ✓ delete ✓
+
         - copy `NEXT_PUBLIC_APPWRITE_TASKS_ID`
 
 6. Create **storage** 
@@ -187,6 +189,7 @@
 - [x] `feet(workspaces)`: add workspace projects
 - [x] `feet(projects)`: create project settings
 - [x] `feet`: create task api
+- [x] `feet(tasks)`: add task form
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 
