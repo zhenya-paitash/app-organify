@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "posting": "posting --env .env.local --collection ./posting/"
+    "posting": "posting --env .env.local --collection ./REST/"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.4.1",
