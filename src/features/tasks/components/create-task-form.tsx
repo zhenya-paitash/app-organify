@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-import { TaskStatus } from "../types";
+import { TaskStatus, TaskStatusNames } from "../types";
 import { createTaskSchema } from "../schemas"
 import { useCreateTask } from "../api/use-create-task";
 
@@ -132,12 +132,12 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                       </FormControl>
                       <FormMessage />
                       <SelectContent>
-                        <SelectItem value={TaskStatus.BACKLOG}>Backlog</SelectItem>
-                        <SelectItem value={TaskStatus.IN_PROGRESS}>In Progress</SelectItem>
-                        <SelectItem value={TaskStatus.IN_REVIEW}>In Review</SelectItem>
-                        <SelectItem value={TaskStatus.DELAY}>Delayed</SelectItem>
-                        <SelectItem value={TaskStatus.TODO}>Todo</SelectItem>
-                        <SelectItem value={TaskStatus.DONE}>Completed</SelectItem>
+                        <SelectItem value={TaskStatus.BACKLOG}>{TaskStatusNames[TaskStatus.BACKLOG]}</SelectItem>
+                        <SelectItem value={TaskStatus.IN_PROGRESS}>{TaskStatusNames[TaskStatus.IN_PROGRESS]}</SelectItem>
+                        <SelectItem value={TaskStatus.IN_REVIEW}>{TaskStatusNames[TaskStatus.IN_REVIEW]}</SelectItem>
+                        <SelectItem value={TaskStatus.DELAY}>{TaskStatusNames[TaskStatus.DELAY]}</SelectItem>
+                        <SelectItem value={TaskStatus.TODO}>{TaskStatusNames[TaskStatus.TODO]}</SelectItem>
+                        <SelectItem value={TaskStatus.DONE}>{TaskStatusNames[TaskStatus.DONE]}</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormItem>

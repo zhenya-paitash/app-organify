@@ -6,7 +6,7 @@ import { ID, Query } from "node-appwrite";
 import { getMember } from "@/features/members/utils";
 import { TProject } from "@/features/projects/types";
 
-import { DATABASE_ID, TASKS_ID } from "@/config";
+import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { createTaskSchema } from "../schemas";
@@ -43,11 +43,11 @@ const app = new Hono()
 
     const projectIds = tasks.documents.map(task => task.projectId);
     const queryProjects: string[] = projectIds.length > 0 ? [Query.contains("$id", projectIds)] : [];
-    const projects = await databases.listDocuments<TProject>(DATABASE_ID, "projects", queryProjects);
+    const projects = await databases.listDocuments<TProject>(DATABASE_ID, PROJECTS_ID, queryProjects);
 
     const executorIds = tasks.documents.map(task => task.executorId);
     const queryMembers: string[] = executorIds.length > 0 ? [Query.contains("$id", executorIds)] : [];
-    const members = await databases.listDocuments(DATABASE_ID, "members", queryMembers);
+    const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, queryMembers);
     const executors = await Promise.all(members.documents.map(async member => {
       const user = await users.get(member.userId);
       return { ...member, name: user.name, email: user.email };
