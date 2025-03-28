@@ -1,3 +1,5 @@
+import { Models } from "node-appwrite";
+
 export enum TaskStatus {
   BACKLOG = "BACKLOG",
   DELAY = "DELAY",
@@ -17,3 +19,11 @@ export const TaskStatusNames = {
   [TaskStatus.DONE]: "Completed",
 } as const;
 
+export type TTask = Models.Document & {
+  name: string;
+  status: TaskStatus;
+  dueDate: string;
+  projectId: string;
+  executorId: string;
+  position: number;
+}
