@@ -191,7 +191,7 @@
 - [x] `feet`: create task api
 - [x] `feet(tasks)`: add task form
 - [x] `feet(tasks)`: add task filters
-- [ ] `feet(tasks)`: add task table
+- [x] `feet(tasks)`: add task table
 - [ ] `feet(tasks)`: add task settings
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database

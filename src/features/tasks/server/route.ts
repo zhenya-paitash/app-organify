@@ -10,7 +10,7 @@ import { DATABASE_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
 
 import { createTaskSchema } from "../schemas";
-import { TaskStatus } from "../types";
+import { TaskStatus, TTask } from "../types";
 import { createAdminClient } from "@/lib/appwrite";
 
 const app = new Hono()
@@ -39,7 +39,7 @@ const app = new Hono()
     if (status) queryTasks.push(Query.equal("status", status));
     if (dueDate) queryTasks.push(Query.equal("dueDate", dueDate));
     if (search) queryTasks.push(Query.search("name", search));
-    const tasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, queryTasks);
+    const tasks = await databases.listDocuments<TTask>(DATABASE_ID, TASKS_ID, queryTasks);
 
     const projectIds = tasks.documents.map(task => task.projectId);
     const queryProjects: string[] = projectIds.length > 0 ? [Query.contains("$id", projectIds)] : [];
