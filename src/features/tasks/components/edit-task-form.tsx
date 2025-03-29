@@ -139,7 +139,6 @@ export const EditTaskForm = ({ onCancel, initialValues, projectOptions, memberOp
                         <SelectItem value={TaskStatus.BACKLOG}>{TaskStatusNames[TaskStatus.BACKLOG]}</SelectItem>
                         <SelectItem value={TaskStatus.IN_PROGRESS}>{TaskStatusNames[TaskStatus.IN_PROGRESS]}</SelectItem>
                         <SelectItem value={TaskStatus.IN_REVIEW}>{TaskStatusNames[TaskStatus.IN_REVIEW]}</SelectItem>
-                        <SelectItem value={TaskStatus.DELAY}>{TaskStatusNames[TaskStatus.DELAY]}</SelectItem>
                         <SelectItem value={TaskStatus.TODO}>{TaskStatusNames[TaskStatus.TODO]}</SelectItem>
                         <SelectItem value={TaskStatus.DONE}>{TaskStatusNames[TaskStatus.DONE]}</SelectItem>
                       </SelectContent>

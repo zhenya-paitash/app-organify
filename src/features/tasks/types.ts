@@ -2,7 +2,6 @@ import { Models } from "node-appwrite";
 
 export enum TaskStatus {
   BACKLOG = "BACKLOG",
-  DELAY = "DELAY",
   TODO = "TODO",
   IN_PROGRESS = "IN_PROGRESS",
   IN_REVIEW = "IN_REVIEW",
@@ -12,7 +11,6 @@ export enum TaskStatus {
 // export const TaskStatusNames: Record<TaskStatus, string> = {
 export const TaskStatusNames = {
   [TaskStatus.BACKLOG]: "Backlog",
-  [TaskStatus.DELAY]: "Delayed",
   [TaskStatus.TODO]: "To Do",
   [TaskStatus.IN_PROGRESS]: "In Progress",
   [TaskStatus.IN_REVIEW]: "In Review",
