@@ -24,6 +24,7 @@ export type TTask = Models.Document & {
   status: TaskStatus;
   dueDate: string;
   projectId: string;
+  workspaceId: string;
   executorId: string;
   position: number;
 }
