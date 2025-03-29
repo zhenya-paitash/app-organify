@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 interface UseConfirmProps {
   title: string;
   message: string;
-  variant: ButtonProps["variant"];
+  variant?: ButtonProps["variant"];
 }
 
 export const useConfirm = ({ title, message, variant = "primary" }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
