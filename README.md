@@ -26,6 +26,7 @@
 [![Static Badge](https://img.shields.io/badge/hono-%23E36002?style=for-the-badge&logo=Hono&logoColor=FFFFFF&link=https%3A%2F%2Fhono.dev%2F)](https://hono.dev/) 
 [![Static Badge](https://img.shields.io/badge/tailwind%20css-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=F8FAFC&link=https%3A%2F%2Ftailwindcss.com%2F)](https://tailwindcss.com/) 
 [![Static Badge](https://img.shields.io/badge/%40tanstack%2Freact%20query-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=FFFFFF&link=https%3A%2F%2Ftanstack.com%2Fquery%2Flatest)](https://tanstack.com/query/latest) 
+[![Static Badge](https://img.shields.io/badge/nuqs-FFF?style=for-the-badge&link=https%3A%2F%2Fnuqs.47ng.com%2F)](https://nuqs.47ng.com/)
 [![Static Badge](https://img.shields.io/badge/postcss-DD3A0A?style=for-the-badge&logo=postcss&link=https%3A%2F%2Fpostcss.org%2F)](https://postcss.org/) 
 [![Static Badge](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&link=https%3A%2F%2Feslint.org%2F)](https://eslint.org/) 
 [![Static Badge](https://img.shields.io/badge/shadcn%2Fui-18181B?style=for-the-badge&link=https%3A%2F%2Fui.shadcn.com%2F)](https://ui.shadcn.com/) 
@@ -103,7 +104,7 @@
 
     - create `tasks` collection
         - attribute `name` type `string` size `256` `required`
-        - attribute `status` type `enum` elements `BACKLOG DELAY TODO IN_PROGRESS IN_REVIEW DONE` `required`
+        - attribute `status` type `enum` elements `BACKLOG TODO IN_PROGRESS IN_REVIEW DONE` `required`
         - attribute `dueDate` type `datetime` `required`
         - attribute `position` type `integer` min `1000` max `1000000` `required`
         - attribute `workspaceId` type `string` size `50` `required`
@@ -193,6 +194,7 @@
 - [x] `feet(tasks)`: add task filters
 - [x] `feet(tasks)`: add task table
 - [x] `feet(tasks)`: add task settings
+- [x] `feet(tasks)`: add task kanban view
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

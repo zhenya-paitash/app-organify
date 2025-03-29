@@ -17,6 +17,7 @@ import { columns } from "./columns";
 import { useGetTasks } from "../api/use-get-tasks";
 import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 import { useTaskFilters } from "../hooks/use-task-filters";
+import { DataKnaban } from "./data-kanban";
 
 export const TaskViewSwitcher = () => {
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
@@ -39,6 +40,7 @@ export const TaskViewSwitcher = () => {
         </div>
         <Separator className="my-4" />
         <h3 className="w-full text-center">Data Filters</h3>
+        <DataFilters />
         <Separator className="my-4" />
         {isLoadingTasks ? (
           <div className="w-full h=[200px] flex flex-col items-center justify-center border rounded-lg">
@@ -47,11 +49,10 @@ export const TaskViewSwitcher = () => {
         ) : (
           <>
             <TabsContent value="table" className="mt-0">
-              <DataFilters />
               <DataTable columns={columns} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="kanban" className="mt-0">
-              <DataFilters />
+              <DataKnaban data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="calendar" className="mt-0">
               <DataFilters />
