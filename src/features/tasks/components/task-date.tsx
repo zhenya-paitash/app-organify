@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils";
 interface TaskDateProps {
   value: string;
   className?: string;
+  variant?: string;
 }
 
-export const TaskDate = ({ value, className }: TaskDateProps) => {
+export const TaskDate = ({ value, className, variant = "dd/MM/yyyy" }: TaskDateProps) => {
   const [today, endDate] = [new Date(), new Date(value)];
   const diffInDays = differenceInDays(endDate, today);
 
@@ -22,7 +23,7 @@ export const TaskDate = ({ value, className }: TaskDateProps) => {
 
   return (
     <div className={textColor}>
-      <span className={cn("truncate", className)}>{format(value, "dd / MM / yyyy")}</span>
+      <span className={cn("truncate", className)}>{format(value, variant)}</span>
     </div>
   );
 };

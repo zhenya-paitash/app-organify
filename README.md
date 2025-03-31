@@ -195,6 +195,8 @@
 - [x] `feet(tasks)`: add task table
 - [x] `feet(tasks)`: add task settings
 - [x] `feet(tasks)`: add task kanban view
+- [x] `feet(tasks)`: add task kanban update API
+- [ ] `feet(tasks)`: add task calendar view
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

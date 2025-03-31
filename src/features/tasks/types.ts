@@ -26,3 +26,10 @@ export type TTask = Models.Document & {
   executorId: string;
   position: number;
 }
+
+export type TaskPayload = {
+  $id: string;
+  status: TaskStatus;
+  position: number;
+}
+
