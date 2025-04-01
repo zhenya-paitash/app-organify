@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { DataFilters } from "./data-filters";
 import { DataTable } from "./data-table";
 import { DataKnaban } from "./data-kanban";
+import { DataCalendar } from "./data-calendar";
 import { columns } from "./columns";
 
 import { TaskPayload } from "../types";
@@ -57,13 +58,13 @@ export const TaskViewSwitcher = () => {
         ) : (
           <>
             <TabsContent value="table" className="mt-0">
-              <DataTable columns={columns} data={tasks?.documents ?? []} />
+              <DataTable data={tasks?.documents ?? []} columns={columns} />
             </TabsContent>
             <TabsContent value="kanban" className="mt-0">
               <DataKnaban data={tasks?.documents ?? []} onChange={onKanbanChange} />
             </TabsContent>
-            <TabsContent value="calendar" className="mt-0">
-              <DataFilters />
+            <TabsContent value="calendar" className="mt-0 h-full pb-4">
+              <DataCalendar data={tasks?.documents ?? []} />
             </TabsContent>
           </>
         )}
