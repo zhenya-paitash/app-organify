@@ -22,7 +22,11 @@ import { useCreateTaskModal } from "../hooks/use-create-task-modal";
 import { useTaskFilters } from "../hooks/use-task-filters";
 import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks";
 
-export const TaskViewSwitcher = () => {
+interface TaskViewSwitcherProps {
+  hideProjectFilter?: boolean;
+}
+
+export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) => {
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
 
   const workspaceId = useWorkspaceId();
@@ -49,7 +53,7 @@ export const TaskViewSwitcher = () => {
         </div>
         <Separator className="my-4" />
         <h3 className="w-full text-center">Data Filters</h3>
-        <DataFilters />
+        <DataFilters hideProjectFilter={hideProjectFilter} />
         <Separator className="my-4" />
         {isLoadingTasks ? (
           <div className="w-full h=[200px] flex flex-col items-center justify-center border rounded-lg">

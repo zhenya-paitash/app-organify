@@ -25,6 +25,7 @@ export type TTask = Models.Document & {
   workspaceId: string;
   executorId: string;
   position: number;
+  description?: string;
 }
 
 export type TaskPayload = {
