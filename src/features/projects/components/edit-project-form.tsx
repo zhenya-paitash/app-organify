@@ -51,26 +51,22 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
     }
   });
 
+  // useEffect(() => {
+  //   form.reset({ ...initialValues, image: initialValues.imageUrl ?? "" });
+  // }, [form, initialValues]);
+
   const onSubmit = (values: z.infer<typeof updateProjectSchema>) => {
     const updValues = {
       ...values,
       image: values.image instanceof File ? values.image : "",
     }
 
-    mutate({ form: updValues, param: { projectId: initialValues.$id } }, {
-      onSuccess: () => {
-        form.reset();
-        // window.location.href = `/workspaces/${data.$id}`;
-        // router.push(`/workspaces/${data.$id}`);
-      }
-    });
+    mutate({ form: updValues, param: { projectId: initialValues.$id } });
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      form.setValue("image", file);
-    }
+    if (file) form.setValue("image", file);
   }
 
   const handleDelete = async () => {

@@ -72,17 +72,13 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
   }));
 
   const handleNavigate = (action: CalendarEventAction) => {
-    switch (action) {
-      case CalendarEventType.NEXT:
-        setDate(subMonths(date, 1));
-        break;
-      case CalendarEventType.PREV:
-        setDate(addMonths(date, 1));
-        break;
-      case CalendarEventType.TODAY:
-        setDate(new Date());
-        break;
-    }
+    const actions = {
+      [CalendarEventType.NEXT]: () => setDate(addMonths(date, 1)),
+      [CalendarEventType.PREV]: () => setDate(subMonths(date, 1)),
+      [CalendarEventType.TODAY]: () => setDate(new Date())
+    };
+
+    actions[action]?.();
   };
 
   return (
