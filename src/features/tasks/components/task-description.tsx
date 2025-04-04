@@ -21,6 +21,8 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
     mutate({
       json: { description },
       param: { taskId: task.$id },
+    }, {
+      onSuccess: () => setIsEditing(false),
     });
   };
 

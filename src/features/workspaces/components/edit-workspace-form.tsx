@@ -1,7 +1,7 @@
 "use client";
 
 import { z } from "zod";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -25,10 +25,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
 
 import { useConfirm } from "@/hooks/use-confirm";
-import { updateWorkspaceSchema } from "../schemas";
 import { useUpdateWorkspace } from "../api/use-update-workspace";
 import { useDeleteWorkspace } from "../api/use-delete-workspace";
 import { useResetInviteCode } from "../api/use-reset-invitecode";
+import { updateWorkspaceSchema } from "../schemas";
 import { TWorkspace } from "../types";
 
 interface EditWorkspaceFormProps {
@@ -55,19 +55,17 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     }
   });
 
+  // useEffect(() => {
+  //   form.reset({ ...initialValues, image: initialValues.imageUrl ?? "" });
+  // }, [form, initialValues]);
+
   const onSubmit = (values: z.infer<typeof updateWorkspaceSchema>) => {
     const updValues = {
       ...values,
       image: values.image instanceof File ? values.image : "",
     }
 
-    mutate({ form: updValues, param: { workspaceId: initialValues.$id } }, {
-      onSuccess: () => {
-        form.reset();
-        // window.location.href = `/workspaces/${data.$id}`;
-        // router.push(`/workspaces/${data.$id}`);
-      }
-    });
+    mutate({ form: updValues, param: { workspaceId: initialValues.$id } });
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
