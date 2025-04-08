@@ -5,3 +5,4 @@ export type TProject = Models.Document & {
   imageUrl: string;
   workspaceId: string;
 }
+
