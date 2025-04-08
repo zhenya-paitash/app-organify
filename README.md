@@ -1,4 +1,6 @@
 <div align="center">
+<!-- TODO: добавить оглавление для быстрого перехода к параграфу -->
+
   <img src="preview/logo.webp" width="100" alt="Organify Logo">
   <h1>Organify</h1>
   <h4><i>Own your time. We're here to help.</i></h4>
@@ -10,6 +12,20 @@
 <br>
 
 **Organify** is a time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.
+
+
+<!-- TODO: вставить какую-нибудь GIF или превьюшку проекта  -->
+
+## _Table of Contents_
+
+<div align="center">
+
+[![Static Badge](https://img.shields.io/badge/About-FFCDB2?style=for-the-badge)](#about) 
+[![Static Badge](https://img.shields.io/badge/Features-FFB4A2?style=for-the-badge)](#features)
+[![Static Badge](https://img.shields.io/badge/Installation-E5989B?style=for-the-badge)](#installation)
+[![Static Badge](https://img.shields.io/badge/License-B5828C?style=for-the-badge)](#license)
+
+</div>
 
 ## _About_
 
@@ -25,11 +41,12 @@
 [![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^18&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
 [![Static Badge](https://img.shields.io/badge/hono-%23E36002?style=for-the-badge&logo=Hono&logoColor=FFFFFF&link=https%3A%2F%2Fhono.dev%2F)](https://hono.dev/) 
 [![Static Badge](https://img.shields.io/badge/tailwind%20css-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=F8FAFC&link=https%3A%2F%2Ftailwindcss.com%2F)](https://tailwindcss.com/) 
-[![Static Badge](https://img.shields.io/badge/%40tanstack%2Freact%20query-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=FFFFFF&link=https%3A%2F%2Ftanstack.com%2Fquery%2Flatest)](https://tanstack.com/query/latest) 
+[![Static Badge](https://img.shields.io/badge/tanstack%2Freact%20query-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=FFFFFF&link=https%3A%2F%2Ftanstack.com%2Fquery%2Flatest)](https://tanstack.com/query/latest) 
 [![Static Badge](https://img.shields.io/badge/nuqs-FFF?style=for-the-badge&link=https%3A%2F%2Fnuqs.47ng.com%2F)](https://nuqs.47ng.com/)
 [![Static Badge](https://img.shields.io/badge/postcss-DD3A0A?style=for-the-badge&logo=postcss&link=https%3A%2F%2Fpostcss.org%2F)](https://postcss.org/) 
 [![Static Badge](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&link=https%3A%2F%2Feslint.org%2F)](https://eslint.org/) 
 [![Static Badge](https://img.shields.io/badge/shadcn%2Fui-18181B?style=for-the-badge&link=https%3A%2F%2Fui.shadcn.com%2F)](https://ui.shadcn.com/) 
+[![Static Badge](https://img.shields.io/badge/radix%20ui-161618?style=for-the-badge&logo=radixui&link=https%3A%2F%2Fwww.radix-ui.com%2F)](https://www.radix-ui.com/) 
 [![Static Badge](https://img.shields.io/badge/zod-%233E67B1?style=for-the-badge&logo=zod&logoColor=FFFFFF&link=https%3A%2F%2Fzod.dev%2F)](https://zod.dev/) 
 [![Static Badge](https://img.shields.io/badge/appwrite-FD366E?style=for-the-badge&logo=appwrite&logoColor=FFFFFF&link=https%3A%2F%2Fappwrite.io%2F)](https://appwrite.io/) 
 [![Static Badge](https://img.shields.io/badge/react%20big%20calendar-FFF?style=for-the-badge&logo=square&logoColor=000&link=https%3A%2F%2Fgithub.com%2Fjquense%2Freact-big-calendar)](https://github.com/jquense/react-big-calendar)  
@@ -200,6 +217,7 @@
 - [x] `feet(tasks)`: add task calendar view
 - [x] `feet(tasks)`: add task page
 - [x] `refactor`: refactor some server and client components
+- [x] `feet(projects)`: add project analytics
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

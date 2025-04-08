@@ -3,12 +3,15 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { ID, Query } from "node-appwrite";
 
-import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECTS_ID } from "@/config";
+import { DATABASE_ID, IMAGES_BUCKET_ID, PROJECTS_ID, TASKS_ID } from "@/config";
 import { sessionMiddleware } from "@/lib/session-middleware";
+import { DateManager } from "@/lib/date-manager";
 
-import { getMember } from "@/features/members/utils";
 import { createProjectSchema, updateProjectSchema } from "../schemas";
 import { TProject } from "../types";
+
+import { TaskStatus } from "@/features/tasks/types";
+import { getMember } from "@/features/members/utils";
 
 const app = new Hono()
 
@@ -38,6 +41,111 @@ const app = new Hono()
     if (!member) return c.json({ error: "Unauthorized" }, 401);
 
     return c.json({ data: project });
+  })
+
+  .get("/:projectId/analytics", sessionMiddleware, async c => {
+    const user = c.get("user");
+    const databases = c.get("databases");
+    const { projectId } = c.req.param();
+    const project = await databases.getDocument<TProject>(DATABASE_ID, PROJECTS_ID, projectId);
+    const member = await getMember({ databases, workspaceId: project.workspaceId, userId: user.$id });
+    if (!member) return c.json({ error: "Unauthorized" }, 401);
+
+    const now = DateManager.create();
+    const dateMonth = now.month;
+
+    // all tasks
+    const currentMonthTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // only current executor tasks
+    const currentMonthExecutorTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.equal("executorId", member.$id),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthExecutorTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.equal("executorId", member.$id),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // incomplete tasks
+    const currentMonthIncompleteTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthIncompleteTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // completed tasks
+    const currentMonthCompletedTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.equal("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthCompletedTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.equal("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // overdue tasks
+    const currentMonthOverdueTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.lessThan("dueDate", now.value.toISOString()),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthOverdueTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("projectId", projectId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.lessThan("dueDate", now.value.toISOString()),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    const task = {
+      count: currentMonthTasks.total,
+      diff: currentMonthTasks.total - lastMonthTasks.total,
+      executor: {
+        count: currentMonthExecutorTasks.total,
+        diff: currentMonthExecutorTasks.total - lastMonthExecutorTasks.total,
+      },
+      incomplete: {
+        count: currentMonthIncompleteTasks.total,
+        diff: currentMonthIncompleteTasks.total - lastMonthIncompleteTasks.total,
+      },
+      completed: {
+        count: currentMonthCompletedTasks.total,
+        diff: currentMonthCompletedTasks.total - lastMonthCompletedTasks.total,
+      },
+      overdue: {
+        count: currentMonthOverdueTasks.total,
+        diff: currentMonthOverdueTasks.total - lastMonthOverdueTasks.total,
+      }
+    };
+
+    return c.json({ data: { task } });
   })
 
   .post("/", sessionMiddleware, zValidator("form", createProjectSchema), async c => {
