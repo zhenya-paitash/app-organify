@@ -1,9 +1,10 @@
 import { ProjectAnalyticsResponseType } from "@/features/projects/api/use-get-project-analytics";
+import { WorkspaceAnalyticsResponseType } from "@/features/workspaces/api/use-get-workspace-analytics";
 
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { AnalyticsCard } from "./analytics-card";
 
-export const Analytics = ({ data }: ProjectAnalyticsResponseType) => {
+export const Analytics = ({ data }: ProjectAnalyticsResponseType | WorkspaceAnalyticsResponseType) => {
   return (
     <ScrollArea className="w-full border-none rounded-lg whitespace-nowrap shrink-0">
       <div className="w-full flex flex-row gap-x-2.5 pb-4">

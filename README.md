@@ -218,6 +218,7 @@
 - [x] `feet(tasks)`: add task page
 - [x] `refactor`: refactor some server and client components
 - [x] `feet(projects)`: add project analytics
+- [x] `feet(workspaces)`: add workspace analytics
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

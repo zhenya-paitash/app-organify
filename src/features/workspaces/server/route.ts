@@ -3,15 +3,16 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 
-import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
-import { MemberRole } from "@/features/members/types";
-
+import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, TASKS_ID, WORKSPACES_ID } from "@/config";
+import { DateManager } from "@/lib/date-manager";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { generateInviteCode } from "@/lib/utils";
-import { getMember } from "@/features/members/utils";
 
-import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
+import { MemberRole } from "@/features/members/types";
+import { TaskStatus } from "@/features/tasks/types";
 import { TWorkspace } from "../types";
+import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
+import { getMember } from "@/features/members/utils";
 
 const app = new Hono()
 
@@ -57,6 +58,110 @@ const app = new Hono()
         imageUrl: workspace.imageUrl,
       }
     });
+  })
+
+  .get("/:workspaceId/analytics", sessionMiddleware, async c => {
+    const user = c.get("user");
+    const databases = c.get("databases");
+    const { workspaceId } = c.req.param();
+    const member = await getMember({ databases, workspaceId, userId: user.$id });
+    if (!member) return c.json({ error: "Unauthorized" }, 401);
+
+    const now = DateManager.create();
+    const dateMonth = now.month;
+
+    // all tasks
+    const currentMonthTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // only current executor tasks
+    const currentMonthExecutorTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.equal("executorId", member.$id),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthExecutorTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.equal("executorId", member.$id),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // incomplete tasks
+    const currentMonthIncompleteTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthIncompleteTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // completed tasks
+    const currentMonthCompletedTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.equal("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthCompletedTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.equal("status", TaskStatus.DONE),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    // overdue tasks
+    const currentMonthOverdueTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.lessThan("dueDate", now.value.toISOString()),
+      Query.greaterThanEqual("$createdAt", dateMonth.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.end.toISOString()),
+    ]);
+    const lastMonthOverdueTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [
+      Query.equal("workspaceId", workspaceId),
+      Query.notEqual("status", TaskStatus.DONE),
+      Query.lessThan("dueDate", now.value.toISOString()),
+      Query.greaterThanEqual("$createdAt", dateMonth.prev.start.toISOString()),
+      Query.lessThanEqual("$createdAt", dateMonth.prev.end.toISOString()),
+    ]);
+
+    const task = {
+      count: currentMonthTasks.total,
+      diff: currentMonthTasks.total - lastMonthTasks.total,
+      executor: {
+        count: currentMonthExecutorTasks.total,
+        diff: currentMonthExecutorTasks.total - lastMonthExecutorTasks.total,
+      },
+      incomplete: {
+        count: currentMonthIncompleteTasks.total,
+        diff: currentMonthIncompleteTasks.total - lastMonthIncompleteTasks.total,
+      },
+      completed: {
+        count: currentMonthCompletedTasks.total,
+        diff: currentMonthCompletedTasks.total - lastMonthCompletedTasks.total,
+      },
+      overdue: {
+        count: currentMonthOverdueTasks.total,
+        diff: currentMonthOverdueTasks.total - lastMonthOverdueTasks.total,
+      }
+    };
+
+    return c.json({ data: { task } });
   })
 
   .post("/", zValidator("form", createWorkspaceSchema), sessionMiddleware, async c => {
