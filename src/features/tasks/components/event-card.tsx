@@ -1,20 +1,20 @@
 import { useRouter } from "next/navigation";
 
 import { TProject } from "@/features/projects/types"
+import { TMember } from "@/features/members/types";
+import { TaskStatus } from "../types";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import { cn } from "@/lib/utils";
 
-import { TaskStatus } from "../types";
-
-// TODO: fix `any` types
 interface EventCardProps {
   id: string
   title: string
-  project: TProject | any;
-  executor: any;
+  // project: TProject | null | undefined;
+  project: TProject;
+  executor: TMember;
   status: TaskStatus;
 }
 

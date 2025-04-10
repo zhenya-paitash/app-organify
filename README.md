@@ -173,12 +173,7 @@
 
 </details>
 
-
-## _Roadmap_
-
-> [!important]
->
-> Remove this after the project is complete
+## _TODOs_
 
 - [x] `docs`: initial documentation
 - [x] `init`: project setup
@@ -219,9 +214,9 @@
 - [x] `refactor`: refactor some server and client components
 - [x] `feet(projects)`: add project analytics
 - [x] `feet(workspaces)`: add workspace analytics
+- [x] `build`: resolve build errors and some fixes
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
-
 
 ## _License_
 

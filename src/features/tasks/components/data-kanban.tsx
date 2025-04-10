@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { DragDropContext, Droppable, Draggable, type DropResult } from "@hello-pangea/dnd";
 
 import { KanbanColumnHeader } from "./kanban-column-header";
@@ -16,13 +16,20 @@ interface DataKnabanProps {
 }
 
 export const DataKnaban = ({ data, onChange }: DataKnabanProps) => {
-  const initialState: TaskState = {
+  // const initialState: TaskState = {
+  //   [TaskStatus.BACKLOG]: [],
+  //   [TaskStatus.TODO]: [],
+  //   [TaskStatus.IN_PROGRESS]: [],
+  //   [TaskStatus.IN_REVIEW]: [],
+  //   [TaskStatus.DONE]: [],
+  // };
+  const initialState = useMemo(() => ({
     [TaskStatus.BACKLOG]: [],
     [TaskStatus.TODO]: [],
     [TaskStatus.IN_PROGRESS]: [],
     [TaskStatus.IN_REVIEW]: [],
     [TaskStatus.DONE]: [],
-  };
+  }), []);
 
   const [tasks, setTasks] = useState<TaskState>(() => {
     const initialTasks: TaskState = JSON.parse(JSON.stringify(initialState));
@@ -36,7 +43,7 @@ export const DataKnaban = ({ data, onChange }: DataKnabanProps) => {
     for (const task of data) updatedTasks[task.status].push(task);
     for (const board of Object.keys(updatedTasks)) updatedTasks[board as TaskStatus].sort((a, b) => a.position - b.position);
     setTasks(updatedTasks);
-  }, [data]);
+  }, [data, initialState]);
 
   const onDragEnd = useCallback((result: DropResult) => {
     if (!result.destination) return;

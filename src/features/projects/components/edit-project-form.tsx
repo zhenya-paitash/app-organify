@@ -207,7 +207,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
               size="xs"
               variant="destructive"
               type="button"
-              disabled={isPending}
+              disabled={isPending || isDeletingProject}
               onClick={handleDelete}
             >Delete Project</Button>
           </div>
