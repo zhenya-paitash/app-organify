@@ -5,7 +5,6 @@ import Link from "next/link";
 import { WorkspaceSwitcher } from "@/components/workspace-switcher";
 import { Navigation } from "@/components/navigation";
 import { Projects } from "@/components/projects";
-import { Separator } from "./ui/separator";
 
 export const Sidebar = () => {
   return (

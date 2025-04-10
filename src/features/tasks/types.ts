@@ -8,7 +8,6 @@ export enum TaskStatus {
   DONE = "DONE",
 };
 
-// export const TaskStatusNames: Record<TaskStatus, string> = {
 export const TaskStatusNames = {
   [TaskStatus.BACKLOG]: "Backlog",
   [TaskStatus.TODO]: "To Do",

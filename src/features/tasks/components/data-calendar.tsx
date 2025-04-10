@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { EventCard } from "./event-card";
 
 import { TaskStatus, TTask } from "../types";
+import { TProject } from "@/features/projects/types";
+import { TMember } from "@/features/members/types";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./data-calendar.css";
@@ -18,11 +20,14 @@ const localizer = dateFnsLocalizer({ format, getDay, parse, startOfWeek, locales
 interface CalendarEvent {
   id: string;
   title: string;
-  project: string;
-  executor: string;
+  // project: string;
+  // executor: string;
   status: string;
   start: Date;
   end: Date;
+
+  project: TProject;
+  executor: TMember;
 }
 
 enum CalendarEventType {
@@ -64,8 +69,8 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
   const events: CalendarEvent[] = data.map(task => ({
     id: task.$id,
     title: task.name,
-    project: task.project,
-    executor: task.executor,
+    project: task.project as TProject,
+    executor: task.executor as TMember,
     status: task.status,
     start: new Date(task.dueDate),
     end: new Date(task.dueDate),
@@ -112,3 +117,4 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
     />
   );
 };
+

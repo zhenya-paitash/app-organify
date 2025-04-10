@@ -6,6 +6,7 @@ import { TiPlus } from "react-icons/ti";
 import { Loader } from "lucide-react";
 
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
+import { useProjectId } from "@/features/projects/hooks/use-project-id";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -28,10 +29,16 @@ interface TaskViewSwitcherProps {
 
 export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) => {
   const [view, setView] = useQueryState("task-view", { defaultValue: "table" });
-
   const workspaceId = useWorkspaceId();
+  const paramProjectId = useProjectId();
   const [{ projectId, executorId, status, dueDate }] = useTaskFilters();
-  const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({ workspaceId, projectId, status, executorId, dueDate });
+  const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
+    workspaceId,
+    projectId: paramProjectId ?? projectId,
+    status,
+    executorId,
+    dueDate,
+  });
   const { mutate: bulkUpdateTasks } = useBulkUpdateTasks();
   const { open } = useCreateTaskModal();
 

@@ -1,4 +1,4 @@
-import { CircleCheckIcon, CircleDashedIcon, CircleDotIcon, CircleDotDashedIcon, CircleIcon, CirclePauseIcon, PlusIcon } from "lucide-react";
+import { CircleCheckIcon, CircleDashedIcon, CircleDotIcon, CircleDotDashedIcon, CircleIcon, PlusIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
