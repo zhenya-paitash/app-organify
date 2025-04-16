@@ -59,9 +59,6 @@
 
 ## _Installation_
 
-> [!important]
->
-> Add installation screenshots
 
 <details>
     <summary>Настройка базы данных <a href="https://appwrite.io/">Appwrite</a></summary>
@@ -173,6 +170,68 @@
 
 </details>
 
+<br/>
+
+<details>
+    <summary>Setting up OAuth providers <a href="https://appwrite.io/">Appwrite</a></summary>
+    <br/>
+
+
+1. Create `GitHub` provider
+
+    - **Appwrite** > `<your organization>` > `<your project>` > **Auth** > **settings**
+    - create `GitHub` provider
+        - switch `Disabled` to `Enabled`
+        - copy `URI` to `Authorization callback URL` on `GitHub`
+
+    <!-- https://github.com/settings/developers -->
+    - **GitHub** > **Settings** > **Developer settings** > **OAuth Apps** > **New OAuth App**
+        - enter `Application name` your `<your project>`
+        - enter `Homepage URL` `http://localhost:3000`
+        - paste `Authorization callback URL` from `Appwrite OAuth2 Providers URI`
+        - click `Register application`
+        - copy `Client ID` to `App ID` on `Appwrite OAuth2 Providers`
+        - click `Generate a new client secret`
+        - copy `Client Secret` to `App Secret` on `Appwrite OAuth2 Providers`
+
+    - complete configuration `Appwrite` `GitHub` provider
+        - paste `Client ID` from `GitHub`
+        - paste `Client Secret` from `GitHub`
+        - click `Update`
+
+2. Create `Google` provider
+
+    - **Appwrite** > `<your organization>` > `<your project>` > **Auth** > **settings**
+    - create `Google` provider
+        - switch `Disabled` to `Enabled`
+        - copy `URI` to `Authorization callback URL` on `Google`
+
+    <!-- https://console.cloud.google.com/ -->
+    - **Google Cloud** > **Open project picker** `<Ctrl+O>` > **New project** || open `https://console.cloud.google.com/projectcreate`
+        - enter `Project name` your `<your project>`
+        - click `Create`
+        - select `<your project>`
+        - click `APIs & Services` > `OAuth consent screen` > `External` > `Create`
+        - enter `App name` your `<your project>`
+        - select `User support email` your `<your email>`
+        - click `Save and continue`
+        - click `Clients` > `Create client` 
+        - select `Application type` `Web application`
+        - click `Authorized JavaScript origins` `+ Add URI`
+        - enter `Authorized JavaScript origins` `http://localhost:3000`
+        - click `Authorized redirect URIs` `+ Add URI`
+        - paste `Authorization callback URL` from `Appwrite OAuth2 Providers URI`
+        - click `Create`
+        - copy `Client ID`
+        - copy `Client secret`
+
+    - complete configuration `Appwrite` `Google` provider
+        - paste `Client ID` from `Google Cloud`
+        - paste `Client Secret` from `Google Cloud`
+        - click `Update`
+
+</details>
+
 ## _TODOs_
 
 - [x] `docs`: initial documentation
@@ -215,6 +274,7 @@
 - [x] `feet(projects)`: add project analytics
 - [x] `feet(workspaces)`: add workspace analytics
 - [x] `build`: resolve build errors and some fixes
+- [x] `feet(auth)`: add OAuth providers
 - [ ] `style(dashboard)`: refactor dashboard UI
 - [ ] `docs`: create seed file for database
 

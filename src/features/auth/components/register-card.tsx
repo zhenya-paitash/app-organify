@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -79,8 +80,8 @@ export const RegisterCard = () => {
       <SeparatorWithText text="Or register with" />
 
       <CardContent className="grid grid-cols-1 gap-2 p-7 sm:grid-cols-2">
-        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FcGoogle className="size-5" />Google</Button>
-        <Button className="w-full" variant="secondary" size="sm" disabled={isPending}><FaGithub className="size-5" />GitHub</Button>
+        <Button className="w-full" variant="secondary" size="sm" onClick={() => signUpWithGoogle()} disabled={isPending}><FcGoogle className="size-5" />Google</Button>
+        <Button className="w-full" variant="secondary" size="sm" onClick={() => signUpWithGithub()} disabled={isPending}><FaGithub className="size-5" />GitHub</Button>
       </CardContent>
 
       <CardContent className="flex justify-center items-center text-center p-7">
