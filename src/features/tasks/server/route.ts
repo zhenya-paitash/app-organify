@@ -50,7 +50,7 @@ const app = new Hono()
     const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, queryMembers);
     const executors = await Promise.all(members.documents.map(async member => {
       const user = await users.get(member.userId);
-      return { ...member, name: user.name, email: user.email };
+      return { ...member, name: user.name || user.email, email: user.email };
     }));
 
     const populatedTasks = tasks.documents.map(task => {
@@ -74,7 +74,7 @@ const app = new Hono()
     const project = await databases.getDocument<TProject>(DATABASE_ID, PROJECTS_ID, task.projectId);
     const taskMember = await databases.getDocument(DATABASE_ID, MEMBERS_ID, task.executorId);
     const taskUser = await users.get(taskMember.userId);
-    const executor = { ...taskMember, name: taskUser.name, email: taskUser.email };
+    const executor = { ...taskMember, name: taskUser.name || taskUser.email, email: taskUser.email };
 
     return c.json({ data: { ...task, project, executor } });
   })

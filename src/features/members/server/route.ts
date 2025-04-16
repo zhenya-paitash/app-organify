@@ -23,7 +23,7 @@ const app = new Hono()
     const members = await databases.listDocuments<TMember>(DATABASE_ID, MEMBERS_ID, [Query.equal("workspaceId", workspaceId)])
     const membersPopulate = await Promise.all(members.documents.map(async member => {
       const user = await users.get(member.userId);
-      return { ...member, name: user.name, email: user.email };
+      return { ...member, name: user.name || user.email, email: user.email };
     }));
 
     return c.json({ data: { ...members, documents: membersPopulate } });
