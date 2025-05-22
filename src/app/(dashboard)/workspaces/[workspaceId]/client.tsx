@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
 import { CalendarIcon, PlusIcon, SettingsIcon } from "lucide-react";
 
-import { TTask } from "@/features/tasks/types";
+import { TaskStatus, TaskStatusNames, TTask } from "@/features/tasks/types";
 import { TProject } from "@/features/projects/types";
 import { TMember } from "@/features/members/types";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
+import { TaskDate } from "@/features/tasks/components/task-date";
 import { useGetWorkspaceAnalytics } from "@/features/workspaces/api/use-get-workspace-analytics";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useGetProjects } from "@/features/projects/api/use-get-projects";
@@ -23,6 +23,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PageError } from "@/components/page-error";
 import { PageLoader } from "@/components/page-loader";
 import { Analytics } from "@/components/analytics";
+import { Badge } from "@/components/ui/badge";
 
 export const WorkspaceByIdClient = () => {
   const workspaceId = useWorkspaceId();
@@ -43,6 +44,15 @@ export const WorkspaceByIdClient = () => {
         <ProjectList data={projects.documents} count={projects.total} workspaceId={workspaceId} />
         <MemberList data={members.documents} count={members.total} workspaceId={workspaceId} />
       </div>
+      {/* <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4"> */}
+      {/*   <div> */}
+      {/*     <TaskList data={tasks.documents} count={tasks.total} workspaceId={workspaceId} /> */}
+      {/*   </div> */}
+      {/*   <div className="flex flex-col gap-4"> */}
+      {/*     <ProjectList data={projects.documents} count={projects.total} workspaceId={workspaceId} /> */}
+      {/*     <MemberList data={members.documents} count={members.total} workspaceId={workspaceId} /> */}
+      {/*   </div> */}
+      {/* </div> */}
     </div>
   );
 };
@@ -66,19 +76,25 @@ export const TaskList = ({ data, count, workspaceId }: TaskListProps) => {
           </Button>
         </div>
         <Separator className="my-4" />
-        <ul className="flex flex-col gap-y-4">
+        {/* <ul className="flex flex-col gap-y-4"> */}
+        <ul className="grid grid-cols-2 grid-flow-row gap-4">
           {data.map(task => (
             <li key={task.$id}>
               <Link href={`/workspaces/${workspaceId}/tasks/${task.$id}`}>
                 <Card className="shadow-none rounded-lg hover:opacity-75 transition">
-                  <CardContent className="p-4">
+                  <CardContent className="flex flex-col gap-y-2 p-4">
+                    <div className="flex justify-end">
+                      <Badge variant={task.status} className="w-fit">{TaskStatusNames[task.status]}</Badge>
+                    </div>
                     <p className="text-lg font-medium truncate">{task.name}</p>
-                    <div className="flex items-center gap-x-2">
-                      <p>{task.project?.name}</p>
-                      <div className="size-1 rounded-full bg-neutral-300" />
+                    <div className="flex justify-between items-center gap-x-2">
+                      <div className="flex -space-x-2">
+                        <ProjectAvatar className="size-6 rounded-full" name={task.project?.name} image={task.project?.imageUrl} />
+                        <MemberAvatar className="size-6 rounded-full" name={task.executor?.name} />
+                      </div>
                       <div className="flex items-center text-sm text-muted-foreground">
                         <CalendarIcon className="size-3 mr-1" />
-                        <span className="truncate">{formatDistanceToNow(new Date(task.dueDate))}</span>
+                        <TaskDate className="text-xs" value={task.dueDate} variant={task.status === TaskStatus.DONE ? "full" : "diffInDays"} />
                       </div>
                     </div>
                   </CardContent>

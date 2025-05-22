@@ -20,7 +20,7 @@ export const Projects = () => {
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
-        <p className="text.xs uppercase text-foreground/50">Projects</p>
+        <p className="font-heading text-xs uppercase text-foreground/50">Projects</p>
         <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
       </div>
       {data?.documents.map(project => {
@@ -32,8 +32,8 @@ export const Projects = () => {
               "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:opacity-75 transition cursor-pointer text-foreground/75",
               isActive && "bg-background shadow-sm hover:opacity-100 text-primary"
             )}>
-              <ProjectAvatar image={project.imageUrl} name={project.name} />
-              <span className="truncate">{project.name}</span>
+              <ProjectAvatar className="rounded-full" image={project.imageUrl} name={project.name} />
+              <span className="truncate font-normal">{project.name}</span>
             </div>
           </Link>
         );

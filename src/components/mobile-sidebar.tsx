@@ -20,11 +20,12 @@ export const MobileSidebar = () => {
   return (
     <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger className="lg:hidden hover:opacity-75 transition" asChild>
-        <Button variant="secondary" className="lg:hidden">
+        <Button variant="secondary" size="sm" className="lg:hidden">
           <MenuIcon className="size-4 text-neutral-500" />
         </Button>
       </SheetTrigger>
 
+      {/* <SheetContent side="left" className="p-0 w-full sm:max-w-full"> */}
       <SheetContent side="left" className="p-0">
         <Sidebar />
       </SheetContent>

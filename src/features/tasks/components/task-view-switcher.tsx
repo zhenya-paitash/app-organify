@@ -10,7 +10,6 @@ import { useProjectId } from "@/features/projects/hooks/use-project-id";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 import { DataFilters } from "./data-filters";
 import { DataTable } from "./data-table";
 import { DataKnaban } from "./data-kanban";
@@ -51,17 +50,20 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
     <Tabs className="w-full flex-1 border rounded-lg" defaultValue={view} onValueChange={setView}>
       <div className="h-full flex flex-col overflow-auto p-4">
         <div className="flex flex-col gap-y-2 lg:flex-row items-center justify-between">
-          <TabsList className="w-full lg:w-auto">
-            <TabsTrigger className="w-full h-8 lg:w-auto" value="table">Table</TabsTrigger>
-            <TabsTrigger className="w-full h-8 lg:w-auto" value="kanban">Kanban</TabsTrigger>
-            <TabsTrigger className="w-full h-8 lg:w-auto" value="calendar">Calendar</TabsTrigger>
+          <TabsList className="w-full lg:w-auto font-heading">
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="table">Table</TabsTrigger>
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="kanban">Kanban</TabsTrigger>
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="calendar">Calendar</TabsTrigger>
           </TabsList>
-          <Button onClick={open} className="w-full lg:w-auto" size="xs"><TiPlus className="size-4 mr-2" />New</Button>
+          <Button onClick={open} className="w-full lg:w-auto" size="xs"><TiPlus className="size-4 mr-2" />Add Task</Button>
         </div>
-        <Separator className="my-4" />
-        <h3 className="w-full text-center">Data Filters</h3>
-        <DataFilters hideProjectFilter={hideProjectFilter} />
-        <Separator className="my-4" />
+
+        {/* <Separator className="my-4" /> */}
+        <div className="bg-muted/60 rounded-lg my-4 pt-4">
+          <h3 className="w-full text-center">Data Filters</h3>
+          <DataFilters hideProjectFilter={hideProjectFilter} />
+        </div>
+
         {isLoadingTasks ? (
           <div className="w-full h=[200px] flex flex-col items-center justify-center border rounded-lg">
             <Loader className="animate-spin size-5 text-muted-foreground" />

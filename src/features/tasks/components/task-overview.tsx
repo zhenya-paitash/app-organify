@@ -10,6 +10,7 @@ import { TaskDate } from "./task-date";
 import { useEditTaskModal } from "../hooks/use-edit-task-modal";
 
 import { TaskStatusNames, TTask } from "../types";
+import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 
 interface TaskOverviewProps {
   task: TTask;
@@ -33,8 +34,12 @@ export const TaskOverview = ({ task }: TaskOverviewProps) => {
             <MemberAvatar name={task.executor.name} className="size-6" />
             <p className="text-sm font-medium">{task.executor.name}</p>
           </TaskOverviewProperty>
+          <TaskOverviewProperty label="Project">
+            <ProjectAvatar name={task.project.name} image={task.project.imageUrl} className="size-6" />
+            <p className="text-sm font-medium">{task.project.name}</p>
+          </TaskOverviewProperty>
           <TaskOverviewProperty label="Due Date">
-            <TaskDate value={task.dueDate} className="text-sm font-medium" />
+            <TaskDate value={task.dueDate} variant="full" className="text-sm font-medium" />
           </TaskOverviewProperty>
           <TaskOverviewProperty label="Status">
             <Badge variant={task.status}>{TaskStatusNames[task.status]}</Badge>

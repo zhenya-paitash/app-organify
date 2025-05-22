@@ -26,7 +26,7 @@ export const useConfirm = ({ title, message, variant = "primary" }: UseConfirmPr
   }
 
   const ConfirmDialog = () => (
-    <ResponsiveModal open={promise !== null} onOpenChange={close}>
+    <ResponsiveModal open={promise !== null} onOpenChange={close} variant="confirm">
       <Card className="w-full h-full border-none shadown-none">
         <CardContent className="pt-8">
           <CardHeader className="p-0">

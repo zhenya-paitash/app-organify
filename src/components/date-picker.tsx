@@ -24,8 +24,9 @@ export const DatePicker = ({ value, onChange, className, placeholder = "Select a
           variant="outline"
           size="lg"
           className={cn(
-            "w-full justify-start text-left font-normal px-3",
-            !value && "text-muted-foreground",
+            "w-full font-body justify-start text-left font-normal px-3 bg-[inherit] hover:bg-[inherit]",
+            "bg-primary/5",
+            // !value && "text-muted-foreground",
             className
           )}
         >

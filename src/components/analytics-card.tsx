@@ -12,8 +12,8 @@ interface AnalyticsCardProps {
 }
 
 const iconColorMap: Record<AnalyticsCardProps["variant"], string> = {
-  increase: "text-green-500",
-  decrease: "text-red-500",
+  increase: "text-done",
+  decrease: "text-todo",
 };
 
 export const AnalyticsCard = ({ title, value, increaseValue, variant }: AnalyticsCardProps) => {

@@ -35,7 +35,9 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
           {isEditing ? "Cancel" : "Edit"}
         </Button>
       </div>
+
       <Separator className="my-4" />
+
       {isEditing ? (
         <div className="flex flex-col gap-y-4">
           <Textarea
@@ -44,6 +46,7 @@ export const TaskDescription = ({ task }: TaskDescriptionProps) => {
             rows={4}
             onChange={e => setDescription(e.target.value)}
             disabled={isPending}
+            className="bg-primary/10"
           ></Textarea>
           <Button size="sm" className="w-fit ml-auto" onClick={handleSave} disabled={isPending}>
             {isPending ? "Saving..." : "Save Changes"}

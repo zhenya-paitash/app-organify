@@ -1,3 +1,5 @@
+/* see: node_modules/react-big-calendar/lib/sass/styles.scss */
+
 .rbc-header {
   @apply text-sm;
   @apply font-normal;
@@ -20,6 +22,7 @@
   @apply min-h-[180px];
   @apply border-t;
   @apply border-x;
+  @apply border-muted;
 }
 
 :not(.rbc-month-row ~ .rbc-month-row).rbc-month-row {
@@ -40,9 +43,15 @@
 }
 
 .rbc-today {
-  /* background: inherit; */
+  @apply bg-primary/20;
 }
 
 .rbc-off-range-bg {
-  /* background: inherit; */
+  @apply bg-foreground/5;
 }
+
+.rbc-day-bg+.rbc-day-bg,
+.rbc-month-row+.rbc-month-row {
+  @apply border-muted;
+}
+

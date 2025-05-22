@@ -1,39 +1,5 @@
 "use client"
 
-// import * as React from "react"
-// import { Moon, MoonIcon, Sun } from "lucide-react"
-// import { useTheme } from "next-themes"
-//
-// import { Button } from "@/components/ui/button"
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu"
-//
-// export function ThemeButton() {
-//   const { setTheme } = useTheme()
-//
-//   return (
-//     <DropdownMenu>
-//       <DropdownMenuTrigger asChild>
-//         <Button variant="outline" size="icon" >
-//           <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-//           <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-//           <span className="sr-only">Toggle theme</span>
-//         </Button>
-//       </DropdownMenuTrigger>
-//       <DropdownMenuContent align="end">
-//         <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
-//         <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-//         <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-//       </DropdownMenuContent>
-//     </DropdownMenu>
-//   );
-// }
-
-
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -45,10 +11,11 @@ export function ThemeButton() {
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
   return (
-    <Button variant="outline" size="icon" onClick={toggleTheme} className="border-none bg-transparent">
-      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle theme</span>
+    <Button variant="outline" size="icon" onClick={toggleTheme} className="relative w-12 h-8 p-1 rounded-md border-none bg-primary/10 hover:bg-primary/15">
+      <div className="absolute top-1 left-1 w-6 h-6 rounded-sm shadow flex items-center justify-center transition-all duration-300 bg-accent text-primary translate-x-0 dark:translate-x-4">
+        {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+      </div>
     </Button>
-  )
+  );
 }
+
