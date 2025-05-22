@@ -11,6 +11,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ['var(--font-heading)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -51,7 +55,13 @@ const config: Config = {
           '3': 'hsl(var(--chart-3))',
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))'
-        }
+        },
+
+        todo: { DEFAULT: "#F9B8AB", foreground: "#A76459" },
+        progress: { DEFAULT: "#FAD59A", foreground: "#BB754B" },
+        review: { DEFAULT: "#8AAAF9", foreground: "#4d57b4" },
+        done: { DEFAULT: "#70E1BB", foreground: "#228B68" },
+        backlog: { DEFAULT: "#D5D5D6", foreground: "#5D5B61" },
       },
       borderRadius: {
         lg: 'var(--radius)',

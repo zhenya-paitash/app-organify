@@ -173,17 +173,9 @@ const app = new Hono()
 
     let uploadedImageUrl: string | undefined;
     if (image instanceof File) {
-      const file = await storage.createFile(
-        IMAGES_BUCKET_ID,
-        ID.unique(),
-        image
-      );
-
-      const arrayBuffer = await storage.getFilePreview(
-        IMAGES_BUCKET_ID,
-        file.$id,
-      );
-
+      const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), image);
+      // const arrayBuffer = await storage.getFilePreview(IMAGES_BUCKET_ID, file.$id);
+      const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, file.$id);
       uploadedImageUrl = `data:image/png;base64,${Buffer.from(arrayBuffer).toString("base64")}`;
     }
 
@@ -226,17 +218,9 @@ const app = new Hono()
 
     let uploadedImageUrl: string | undefined;
     if (image instanceof File) {
-      const file = await storage.createFile(
-        IMAGES_BUCKET_ID,
-        ID.unique(),
-        image
-      );
-
-      const arrayBuffer = await storage.getFilePreview(
-        IMAGES_BUCKET_ID,
-        file.$id,
-      );
-
+      const file = await storage.createFile(IMAGES_BUCKET_ID, ID.unique(), image);
+      // const arrayBuffer = await storage.getFilePreview(IMAGES_BUCKET_ID, file.$id);
+      const arrayBuffer = await storage.getFileView(IMAGES_BUCKET_ID, file.$id);
       uploadedImageUrl = `data:image/png;base64,${Buffer.from(arrayBuffer).toString("base64")}`;
     } else {
       uploadedImageUrl = image;

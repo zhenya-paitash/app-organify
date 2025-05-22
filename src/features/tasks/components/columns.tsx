@@ -8,7 +8,6 @@ import { MemberAvatar } from "@/features/members/components/member-avatar";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-// import { convertSnakeToTitleCase } from "@/lib/utils";
 
 import { TaskDate } from "./task-date";
 import { TaskActions } from "./task-actions";
@@ -86,7 +85,8 @@ export const columns: ColumnDef<TTask>[] = [
     },
     cell: ({ row }) => {
       const dueDate = row.original.dueDate;
-      return <TaskDate value={dueDate} />;
+      return <TaskDate value={dueDate} variant="full" />;
+      // return <TaskDate value={dueDate} />;
     },
   },
 
@@ -102,13 +102,14 @@ export const columns: ColumnDef<TTask>[] = [
     },
     cell: ({ row }) => {
       const status = row.original.status;
-      // return <Badge>{convertSnakeToTitleCase(status)}</Badge>;
       return <Badge variant={status}>{TaskStatusNames[status]}</Badge>;
     },
   },
 
   { // ACTIONS
     accessorKey: "actions",
+    // header: () => <Button variant="ghost">Actions</Button>,
+    header: () => null,
     cell: ({ row }) => {
       const id = row.original.$id;
       const projectId = row.original.projectId;

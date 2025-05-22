@@ -8,13 +8,7 @@ import { WorkspaceAvatar } from "@/features/workspaces/components/workspace-avat
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { useCreateWorkspaceModal } from "@/features/workspaces/hooks/use-create-workspace-modal";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
@@ -29,12 +23,12 @@ export const WorkspaceSwitcher = () => {
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
-        <p className="text.xs uppercase text-foreground/50">Workspaces</p>
+        <p className="font-heading text-xs uppercase text-foreground/50">Workspaces</p>
         <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
       </div>
 
       <Select onValueChange={onSelectWorkspace} value={workspaceId}>
-        <SelectTrigger className="w-full bg-foreground/10 font-medium py-8">
+        <SelectTrigger className="w-full bg-foreground/10 font-medium py-8 border-none">
           <SelectValue placeholder="No workspace selected" />
         </SelectTrigger>
         <SelectContent>

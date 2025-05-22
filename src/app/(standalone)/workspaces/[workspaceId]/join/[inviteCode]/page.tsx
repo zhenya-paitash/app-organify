@@ -5,7 +5,8 @@ import { getCurrent } from "@/features/auth/queries";
 import { WorkspaceByIdJoinClient } from "./client";
 
 const WorkspaceByIdJoinPage = async () => {
-  const user = getCurrent();
+  const user = await getCurrent();
+  console.log(user);
   if (!user) redirect("/login");
 
   return <WorkspaceByIdJoinClient />

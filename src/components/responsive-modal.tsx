@@ -6,10 +6,11 @@ import { Drawer, DrawerContent } from "@/components/ui/drawer";
 interface ResponsiveModalProps {
   children: React.ReactNode;
   open: boolean;
+  variant?: "default" | "confirm";
   onOpenChange: (open: boolean) => void;
 };
 
-export const ResponsiveModal = ({ children, open, onOpenChange }: ResponsiveModalProps) => {
+export const ResponsiveModal = ({ children, open, variant, onOpenChange }: ResponsiveModalProps) => {
   const isMobile = useMedia("(max-width: 768px)");
 
   if (isMobile) {
@@ -26,7 +27,7 @@ export const ResponsiveModal = ({ children, open, onOpenChange }: ResponsiveModa
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar max-h-[85vh]">
+      <DialogContent variant={variant ?? "default"} className="w-full sm:max-w-lg p-0 border-none overflow-y-auto hide-scrollbar bg-card">
         {children}
       </DialogContent>
     </Dialog>

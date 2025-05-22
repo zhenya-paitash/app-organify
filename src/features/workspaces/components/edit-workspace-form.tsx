@@ -104,7 +104,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     <div className="flex flex-col gap-y-4">
       <DeleteDialog />
       <ResetInviteDialog />
-      <Card className="w-full h-full border-none shadow-none bg-background">
+      <Card className="w-full h-full border-none shadow-none">
         <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
           <Button size="sm" variant="secondary" onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}>
             <ArrowLeftIcon className="size-4 mr-2" />Back
@@ -215,7 +215,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
         </CardContent>
       </Card>
 
-      <Card className="w-full h-full border-none shadow-none bg-background">
+      <Card className="w-full h-full border-none shadow-none">
         <CardContent className="p-7">
           <div className="flex flex-col">
             <h3 className="font-bold">Invite Members</h3>
@@ -223,9 +223,9 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
               Invite others to join your workspace.
             </p>
             <div className="mt-4">
-              <div className="flex items-center gap-x-2">
-                <Input value={inviteLink} disabled />
-                <Button type="button" variant="secondary" size="xs" className="size-12" onClick={handleCopyInviteLink}><CopyIcon className="size-5" /></Button>
+              <div className="flex items-center gap-x-2 relative">
+                <Input value={inviteLink} disabled className="pr-14" />
+                <Button type="button" variant="secondary" size="xs" className="size-12 absolute right-1" onClick={handleCopyInviteLink}><CopyIcon className="size-5" /></Button>
               </div>
             </div>
             <Separator className="py-7" />
@@ -241,7 +241,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
         </CardContent>
       </Card>
 
-      <Card className="w-full h-full border-none shadow-none bg-background">
+      <Card className="w-full h-full border-none shadow-none">
         <CardContent className="p-7">
           <div className="flex flex-col">
             <h3 className="font-bold">Danger Zone</h3>

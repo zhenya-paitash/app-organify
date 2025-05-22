@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment } from "react";
-import { ArrowLeftIcon, MoreVerticalIcon } from "lucide-react";
+import { MoreVerticalIcon, ShieldCheckIcon } from "lucide-react";
 
 import { MemberRole } from "@/features/members/types";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
@@ -45,9 +44,9 @@ export const MembersList = () => {
     <Card className="w-full h-wull border-none shadow-none">
       <DeleteMemberDialog />
       <CardHeader className="flex flex-row items-center gap-x-4 space-y-0 p-7 ">
-        <Button variant="secondary" size="sm" asChild>
-          <Link href={`/workspaces/${workspaceId}`}><ArrowLeftIcon className="size-4 mr-2" />Back</Link>
-        </Button>
+        {/* <Button variant="secondary" size="sm" asChild> */}
+        {/*   <Link href={`/workspaces/${workspaceId}`}><ArrowLeftIcon className="size-4 mr-2" />Back</Link> */}
+        {/* </Button> */}
         <CardTitle className="text-xl font-bold">Members List</CardTitle>
       </CardHeader>
 
@@ -58,6 +57,7 @@ export const MembersList = () => {
           <Fragment key={member.$id}>
             <div className="flex items-center gap-2">
               <MemberAvatar className="size-10" name={member.name} fallbackClassName="text-lg" />
+              {member.role === MemberRole.ADMIN && <div className="text-xs text-muted-foreground"><ShieldCheckIcon className="size-4" /></div>}
               <div className="flex flex-col">
                 <p className="text-sm font-medium">{member.name}</p>
                 <p className="text-xs text-muted-foreground">{member.email}</p>

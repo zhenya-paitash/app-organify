@@ -8,8 +8,8 @@ import { Projects } from "@/components/projects";
 
 export const Sidebar = () => {
   return (
-    <aside className="h-full w-full p-4 bg-background/20 flex flex-col gap-y-8">
-      <Link href="/"><span>APP ORGANIFY</span></Link>
+    <aside className="h-full w-full flex flex-col gap-y-8 p-4">
+      <Link href="/"><span className="font-heading text-xl text-primary">app organify</span></Link>
       <WorkspaceSwitcher />
       <Navigation />
       <Projects />

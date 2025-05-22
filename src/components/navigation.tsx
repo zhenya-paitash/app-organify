@@ -20,9 +20,9 @@ interface Route {
 
 const routes: Route[] = [
   { label: "Home", href: "", icon: GoHome, activeIcon: GoHomeFill },
-  { label: "My Tasks", href: "/tasks", icon: GoCheckCircle, activeIcon: GoCheckCircleFill },
+  { label: "Tasks", href: "/tasks", icon: GoCheckCircle, activeIcon: GoCheckCircleFill },
+  { label: "Members", href: "/members", icon: UsersIcon, activeIcon: UsersIcon }, 
   { label: "Settings", href: "/settings", icon: SettingsIcon, activeIcon: SettingsIcon },
-  { label: "Members", href: "/members", icon: UsersIcon, activeIcon: UsersIcon },
 ];
 
 export const Navigation = () => {
@@ -30,7 +30,7 @@ export const Navigation = () => {
   const workspaceId = useWorkspaceId();
 
   return (
-    <ul className="flex flex-col ">
+    <ul className="flex flex-col font-heading">
       {routes.map(({ label, href, icon, activeIcon }: Route) => {
         const fullHref = `/workspaces/${workspaceId}${href}`
         const isActive = pathname === fullHref;
@@ -39,8 +39,8 @@ export const Navigation = () => {
         return (
           <Link href={fullHref} key={href}>
             <div className={cn(
-              "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-neutral-500",
-              isActive && "bg-white shadow-sm hover:opacity-100 text-primary"
+              "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-foreground/50",
+              isActive && "bg-primary/95 text-secondary shadow-sm hover:opacity-100 hover:text-background/95"
             )}>
               <Icon className="size-5 text-neutral-500" />
               {label}

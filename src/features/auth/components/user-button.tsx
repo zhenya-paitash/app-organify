@@ -29,27 +29,26 @@ export const UserButton = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none relative">
-        <Avatar className="size-10 hover:opacity-75 transition border border-foreground/50">
+        <Avatar className="size-8 hover:opacity-75 transition">
           <AvatarFallback className="flex items-center justify-center font-medium">{avatarFallback}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-56" align="end" side="bottom" sideOffset={10}>
-        <div className="flex flex-col items-center justify-center gap-2 px-2.5 py-4">
-          <Avatar className="size-[48px] border border-foreground/50">
-            <AvatarFallback className="flex items-center justify-center font-medium text-xl">{avatarFallback}</AvatarFallback>
-          </Avatar>
+      <DropdownMenuContent className="w-full min-w-80 border-2" align="end" side="bottom" sideOffset={10}>
+        <div className="flex items-center justify-between gap-2 p-2">
+          <div className="flex gap-x-4">
+            <Avatar className="size-12">
+              <AvatarFallback className="flex items-center justify-center font-medium text-xl">{avatarFallback}</AvatarFallback>
+            </Avatar>
 
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-sm font-medium text-foreground/75">{name || "User"}</p>
-            <p className="text-xs text-foreground/50">{email}</p>
+            <div className="flex flex-col justify-center">
+              <p className="text-sm font-medium text-foreground/75 truncate max-w-48">{name || "User"}</p>
+              <p className="text-xs text-foreground/50 truncate max-w-48">{email}</p>
+            </div>
           </div>
 
-          <DropdownMenuItem
-            className="flex items-center justify-center h-10 font-medium cursor-pointer text-amber-800"
-            onClick={() => logout()}
-          >
-            <LogOut className="size-4 mr-2" /> Logout
+          <DropdownMenuItem className="flex items-center justify-center h-12 font-heading cursor-pointer text-foreground/75" onClick={() => logout()}>
+            <LogOut className="size-4 mr-1" />Logout
           </DropdownMenuItem>
         </div>
       </DropdownMenuContent>
