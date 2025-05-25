@@ -276,6 +276,8 @@
 - [x] `build`: resolve build errors and some fixes
 - [x] `feet(auth)`: add OAuth providers
 - [x] `style`: refactor application UI
+- [x] `feet(cursor)`: init
+- [x] `feet(cursor)`: update to latest version of Next.js/React and components
 - [ ] `docs`: create seed file for database
 
 ## _License_

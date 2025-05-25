@@ -13,7 +13,8 @@ export async function GET(request: NextRequest): Promise<Response> {
   const { account } = await createAdminClient();
   const session = await account.createSession(userId, secret);
 
-  cookies().set(AUTH_COOKIE, session.secret, {
+  const cookieStore = await cookies();
+  cookieStore.set(AUTH_COOKIE, session.secret, {
     path: "/",
     httpOnly: true,
     sameSite: "strict",
