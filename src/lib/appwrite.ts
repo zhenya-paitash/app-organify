@@ -20,7 +20,8 @@ export async function createSessionClient(): Promise<CreateSessionClient> {
     .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
 
-  const session = cookies().get(AUTH_COOKIE);
+  const cookieStore = await cookies();
+  const session = cookieStore.get(AUTH_COOKIE);
   if (!session || !session.value) { throw new Error("Unauthorized") }
 
   client.setSession(session.value);
