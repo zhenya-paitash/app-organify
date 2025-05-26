@@ -1,15 +1,11 @@
 "use client";
 
 import { z } from "zod";
-import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Form,
@@ -22,6 +18,7 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
+import { ImageUpload } from '@/components/ui/image-upload';
 
 import { createWorkspaceSchema } from "../schemas";
 import { useCreateWorkspace } from "../api/use-create-workspace";
@@ -33,8 +30,6 @@ interface CreateWorkspaceFormProps {
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useCreateWorkspace();
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof createWorkspaceSchema>>({
     resolver: zodResolver(createWorkspaceSchema),
@@ -57,22 +52,13 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
     });
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      form.setValue("image", file);
-    }
-  }
-
   return (
     <Card className="w-full h-full border-none shadow-none">
       <CardHeader className="flex p-7">
         <CardTitle className="text-xl font-bold">New Workspace</CardTitle>
       </CardHeader>
 
-      {/* <div className="p-7"> */}
       <Separator />
-      {/* </div> */}
 
       <CardContent className="p-7">
         <div className="flex flex-col gap-y-4">
@@ -99,65 +85,12 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormProps) => {
                   <FormItem className="py-4">
                     <FormLabel>Workspace Image</FormLabel>
                     <FormControl>
-                      <div className="flex items-center gap-x-5">
-                        {field.value ? (
-                          <div className="size-[72px] relative rounded-md overflow-hidden">
-                            <Image
-                              className="object-cover"
-                              src={field.value instanceof File ? URL.createObjectURL(field.value) : field.value}
-                              alt="Logo"
-                              fill
-                            />
-                          </div>
-                        ) : (
-                          <Avatar className="size-[72px]">
-                            <AvatarFallback>
-                              <ImageIcon className="size-[36px] text-muted-foreground" />
-                            </AvatarFallback>
-                          </Avatar>
-                        )}
-
-                        <div className="flex flex-col">
-                          <p className="text-sm">Workspace Icon</p>
-                          <p className="text-sm text-muted-foreground">
-                            SVG, PNG, JPG or JPEG (max. 1MB).
-                          </p>
-                          <input
-                            className="hidden"
-                            type="file"
-                            accept=".jpg, .png, .jpeg, .svg"
-                            ref={inputRef}
-                            onChange={handleImageChange}
-                            disabled={isPending}
-                          />
-                          {field.value ?
-                            (
-                              <Button
-                                type="button"
-                                variant="destructive"
-                                size="xs"
-                                className="w-fit mt-2"
-                                onClick={() => {
-                                  field.onChange(null);
-                                  if (inputRef.current) {
-                                    inputRef.current.value = "";
-                                  }
-                                }}
-                                disabled={isPending}
-                              >Remove image</Button>
-                            ) : (
-                              <Button
-                                type="button"
-                                variant="upload"
-                                size="xs"
-                                className="w-fit mt-2"
-                                onClick={() => inputRef.current?.click()}
-                                disabled={isPending}
-                              >Upload image</Button>
-                            )
-                          }
-                        </div>
-                      </div>
+                      <ImageUpload
+                        value={field.value}
+                        onChange={field.onChange}
+                        disabled={isPending}
+                        label="Workspace Icon"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

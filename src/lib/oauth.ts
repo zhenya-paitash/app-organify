@@ -8,7 +8,8 @@ import { createAdminClient } from "@/lib//appwrite";
 
 async function signUpWithOAuth(provider: OAuthProvider) {
   const { account } = await createAdminClient();
-  const origin = headers().get("origin");
+  const headersList = await headers();
+  const origin = headersList.get("origin");
   const redirectUrl = await account.createOAuth2Token(provider, `${origin}/oauth`, `${origin}/register`);
   return redirect(redirectUrl);
 }

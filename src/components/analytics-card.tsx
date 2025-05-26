@@ -22,7 +22,7 @@ export const AnalyticsCard = ({ title, value, increaseValue, variant }: Analytic
   const Icon = variant === "increase" ? FaCaretUp : FaCaretDown;
 
   return (
-    <Card className="w-full shadow-none border-none">
+    <Card className="w-full shadow-none border-none" data-cursor-stick data-cursor-scale={0.5}>
       <CardHeader>
         <div className="flex items-center gap-x-2.5">
           <CardDescription className="flex items-center gap-x-2 font-medium overflow-hidden">

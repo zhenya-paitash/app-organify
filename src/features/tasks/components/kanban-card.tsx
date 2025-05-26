@@ -23,7 +23,7 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
   const { background, foreground } = colorByStatus[task.status];
 
   return (
-    <div className="bg-background rounded-lg shadow-sm space-y-5 mb-2.5">
+    <div className="bg-background rounded-lg shadow-sm space-y-5 mb-2.5" data-cursor-scale={0.5}>
       <div className={`${background} p-2.5 rounded-[inherit] space-y-5`}>
         <div className="flex items-start justify-between gap-x-2">
           <div className={`${foreground} text-backlog-foreground flex gap-x-2`}>

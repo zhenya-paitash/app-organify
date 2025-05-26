@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
 
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Sidebar } from "./sidebar";
 
@@ -27,6 +27,9 @@ export const MobileSidebar = () => {
 
       {/* <SheetContent side="left" className="p-0 w-full sm:max-w-full"> */}
       <SheetContent side="left" className="p-0">
+        <SheetHeader className="sr-only">
+          <SheetTitle>Navigation Menu</SheetTitle>
+        </SheetHeader>
         <Sidebar />
       </SheetContent>
     </Sheet>

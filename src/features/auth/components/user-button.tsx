@@ -47,7 +47,7 @@ export const UserButton = () => {
             </div>
           </div>
 
-          <DropdownMenuItem className="flex items-center justify-center h-12 font-heading cursor-pointer text-foreground/75" onClick={() => logout()}>
+          <DropdownMenuItem className="flex items-center justify-center h-12 font-heading cursor-pointer text-foreground/75" onClick={() => logout()} data-cursor-scale={3} data-cursor-stick data-cursor-blend="exclusion">
             <LogOut className="size-4 mr-1" />Logout
           </DropdownMenuItem>
         </div>

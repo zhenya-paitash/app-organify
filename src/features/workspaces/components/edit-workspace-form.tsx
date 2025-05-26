@@ -1,16 +1,14 @@
 "use client";
 
 import { z } from "zod";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, CopyIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Form,
@@ -30,6 +28,7 @@ import { useDeleteWorkspace } from "../api/use-delete-workspace";
 import { useResetInviteCode } from "../api/use-reset-invitecode";
 import { updateWorkspaceSchema } from "../schemas";
 import { TWorkspace } from "../types";
+import { ImageUpload } from '@/components/ui/image-upload';
 
 interface EditWorkspaceFormProps {
   onCancel?: () => void;
@@ -45,8 +44,6 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
   const [DeleteDialog, confirmDelete] = useConfirm({ title: "Delete workspace", message: "Are you sure you want to delete this workspace?", variant: "destructive" });
   const [ResetInviteDialog, confirmResetInviteDialog] = useConfirm({ title: "Reset invite code", message: "Are yo sure? This invalidates all existing invite codes", variant: "destructive" });
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const form = useForm<z.infer<typeof updateWorkspaceSchema>>({
     resolver: zodResolver(updateWorkspaceSchema),
     defaultValues: {
@@ -55,10 +52,6 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     }
   });
 
-  // useEffect(() => {
-  //   form.reset({ ...initialValues, image: initialValues.imageUrl ?? "" });
-  // }, [form, initialValues]);
-
   const onSubmit = (values: z.infer<typeof updateWorkspaceSchema>) => {
     const updValues = {
       ...values,
@@ -66,13 +59,6 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     }
 
     mutate({ form: updValues, param: { workspaceId: initialValues.$id } });
-  }
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      form.setValue("image", file);
-    }
   }
 
   const handleDelete = async () => {
@@ -92,7 +78,6 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     resetInviteCode({ param: { workspaceId: initialValues.$id } });
   }
 
-  // const inviteLink = `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
   const inviteLink = useMemo(() => { return `${window.location.origin}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}` }, [initialValues.$id, initialValues.inviteCode]);
 
   const handleCopyInviteLink = () => {
@@ -138,65 +123,12 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                     <FormItem className="py-4">
                       <FormLabel>Workspace Image</FormLabel>
                       <FormControl>
-                        <div className="flex items-center gap-x-5">
-                          {field.value ? (
-                            <div className="size-[72px] relative rounded-md overflow-hidden">
-                              <Image
-                                className="object-cover"
-                                src={field.value instanceof File ? URL.createObjectURL(field.value) : field.value}
-                                alt="Logo"
-                                fill
-                              />
-                            </div>
-                          ) : (
-                            <Avatar className="size-[72px]">
-                              <AvatarFallback>
-                                <ImageIcon className="size-[36px] text-muted-foreground" />
-                              </AvatarFallback>
-                            </Avatar>
-                          )}
-
-                          <div className="flex flex-col">
-                            <p className="text-sm">Workspace Icon</p>
-                            <p className="text-sm text-muted-foreground">
-                              SVG, PNG, JPG or JPEG (max. 1MB).
-                            </p>
-                            <input
-                              className="hidden"
-                              type="file"
-                              accept=".jpg, .png, .jpeg, .svg"
-                              ref={inputRef}
-                              onChange={handleImageChange}
-                              disabled={isPending}
-                            />
-                            {field.value ?
-                              (
-                                <Button
-                                  type="button"
-                                  variant="destructive"
-                                  size="xs"
-                                  className="w-fit mt-2"
-                                  onClick={() => {
-                                    field.onChange(null);
-                                    if (inputRef.current) {
-                                      inputRef.current.value = "";
-                                    }
-                                  }}
-                                  disabled={isPending}
-                                >Remove image</Button>
-                              ) : (
-                                <Button
-                                  type="button"
-                                  variant="upload"
-                                  size="xs"
-                                  className="w-fit mt-2"
-                                  onClick={() => inputRef.current?.click()}
-                                  disabled={isPending}
-                                >Upload image</Button>
-                              )
-                            }
-                          </div>
-                        </div>
+                        <ImageUpload
+                          value={field.value}
+                          onChange={field.onChange}
+                          disabled={isPending}
+                          label="Workspace Icon"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

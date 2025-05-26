@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -10,11 +12,13 @@ interface UseConfirmProps {
   variant?: ButtonProps["variant"];
 }
 
-export const useConfirm = ({ title, message, variant = "primary" }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
+export const useConfirm = ({ title, message, variant }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
   const [promise, setPromise] = useState<{ resolve: (value: boolean) => void } | null>(null);
 
   const confirm = () => new Promise((resolve) => setPromise({ resolve }));
-  const close = () => setPromise(null);
+  const close = () => {
+    setPromise(null);
+  };
 
   const handleConfirm = () => {
     promise?.resolve(true);
@@ -26,7 +30,7 @@ export const useConfirm = ({ title, message, variant = "primary" }: UseConfirmPr
   }
 
   const ConfirmDialog = () => (
-    <ResponsiveModal open={promise !== null} onOpenChange={close} variant="confirm">
+    <ResponsiveModal open={promise !== null} onOpenChange={close} variantModal="confirm">
       <Card className="w-full h-full border-none shadown-none">
         <CardContent className="pt-8">
           <CardHeader className="p-0">

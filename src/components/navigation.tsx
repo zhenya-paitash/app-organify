@@ -41,7 +41,7 @@ export const Navigation = () => {
             <div className={cn(
               "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:text-primary transition text-foreground/50",
               isActive && "bg-primary/95 text-secondary shadow-sm hover:opacity-100 hover:text-background/95"
-            )}>
+            )} data-cursor-scale={0.5}>
               <Icon className="size-5 text-neutral-500" />
               {label}
             </div>

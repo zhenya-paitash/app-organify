@@ -2,8 +2,14 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
-  ({ className, type, ...props }, ref) => {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  value?: string | number | readonly string[]
+  defaultValue?: string | number | readonly string[]
+}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, value, defaultValue, ...props }, ref) => {
     return (
       <input
         type={type}
@@ -13,6 +19,11 @@ const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLI
           className
         )}
         ref={ref}
+        data-cursor-stick
+        data-cursor-scale={3}
+        data-cursor-blend="exclusion"
+        value={value ?? ""}
+        defaultValue={defaultValue}
         {...props}
       />
     )

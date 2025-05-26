@@ -36,9 +36,9 @@ export const RegisterCard = () => {
         <CardTitle className="text-3xl p-4 font-bold">Join to <span className="bg-primary p-1 px-4 rounded-md text-background">Organify</span></CardTitle>
         <CardDescription className="text-gray-600 pb-4">
           By signing up, you agree to our{" "}
-          <Link href="/terms"><span className="link">terms</span></Link>
+          <Link href="/terms" data-cursor-scale={0.5}><span className="link">terms</span></Link>
           {" and "}
-          <Link href="/policy"><span className="link">policy</span></Link>
+          <Link href="/policy" data-cursor-scale={0.5}><span className="link">policy</span></Link>
         </CardDescription>
       </CardHeader>
 
@@ -85,7 +85,7 @@ export const RegisterCard = () => {
       </CardContent>
 
       <CardContent className="flex justify-center items-center text-center p-7">
-        <p>Already have an account?&nbsp;<Link href="/login"><span className="link">Log In</span></Link></p>
+        <p>Already have an account?&nbsp;<Link href="/login" data-cursor-scale={0.5}><span className="link">Log In</span></Link></p>
       </CardContent>
     </Card>
   );

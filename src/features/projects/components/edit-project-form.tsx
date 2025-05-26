@@ -1,15 +1,12 @@
 "use client";
 
 import { z } from "zod";
-import { useRef } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeftIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Form,
@@ -28,6 +25,7 @@ import { useConfirm } from "@/hooks/use-confirm";
 import { updateProjectSchema } from "../schemas";
 import { useUpdateProject } from "../api/use-update-project";
 import { useDeleteProject } from "../api/use-delete-project";
+import { ImageUpload } from '@/components/ui/image-upload';
 
 interface EditProjectFormProps {
   onCancel?: () => void;
@@ -41,8 +39,6 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
 
   const [DeleteDialog, confirmDelete] = useConfirm({ title: "Delete project", message: "Are you sure you want to delete this project?", variant: "destructive" });
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const form = useForm<z.infer<typeof updateProjectSchema>>({
     resolver: zodResolver(updateProjectSchema),
     defaultValues: {
@@ -51,10 +47,6 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
     }
   });
 
-  // useEffect(() => {
-  //   form.reset({ ...initialValues, image: initialValues.imageUrl ?? "" });
-  // }, [form, initialValues]);
-
   const onSubmit = (values: z.infer<typeof updateProjectSchema>) => {
     const updValues = {
       ...values,
@@ -62,11 +54,6 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
     }
 
     mutate({ form: updValues, param: { projectId: initialValues.$id } });
-  }
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) form.setValue("image", file);
   }
 
   const handleDelete = async () => {
@@ -116,65 +103,12 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormProp
                     <FormItem className="py-4">
                       <FormLabel>Project Image</FormLabel>
                       <FormControl>
-                        <div className="flex items-center gap-x-5">
-                          {field.value ? (
-                            <div className="size-[72px] relative rounded-md overflow-hidden">
-                              <Image
-                                className="object-cover"
-                                src={field.value instanceof File ? URL.createObjectURL(field.value) : field.value}
-                                alt="Logo"
-                                fill
-                              />
-                            </div>
-                          ) : (
-                            <Avatar className="size-[72px]">
-                              <AvatarFallback>
-                                <ImageIcon className="size-[36px] text-muted-foreground" />
-                              </AvatarFallback>
-                            </Avatar>
-                          )}
-
-                          <div className="flex flex-col">
-                            <p className="text-sm">Project Icon</p>
-                            <p className="text-sm text-muted-foreground">
-                              SVG, PNG, JPG or JPEG (max. 1MB).
-                            </p>
-                            <input
-                              className="hidden"
-                              type="file"
-                              accept=".jpg, .png, .jpeg, .svg"
-                              ref={inputRef}
-                              onChange={handleImageChange}
-                              disabled={isPending}
-                            />
-                            {field.value ?
-                              (
-                                <Button
-                                  type="button"
-                                  variant="destructive"
-                                  size="xs"
-                                  className="w-fit mt-2"
-                                  onClick={() => {
-                                    field.onChange(null);
-                                    if (inputRef.current) {
-                                      inputRef.current.value = "";
-                                    }
-                                  }}
-                                  disabled={isPending}
-                                >Remove image</Button>
-                              ) : (
-                                <Button
-                                  type="button"
-                                  variant="upload"
-                                  size="xs"
-                                  className="w-fit mt-2"
-                                  onClick={() => inputRef.current?.click()}
-                                  disabled={isPending}
-                                >Upload image</Button>
-                              )
-                            }
-                          </div>
-                        </div>
+                        <ImageUpload
+                          value={field.value}
+                          onChange={field.onChange}
+                          disabled={isPending}
+                          label="Project Icon"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

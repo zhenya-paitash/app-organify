@@ -35,10 +35,10 @@
 **Year:** 2024  
 **Stack:** 
 
-[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=1.2.13&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
+[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=^1.2.14&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
-[![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=14.2.18&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
-[![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^18&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
+[![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=^15.3&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
+[![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^19.1&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
 [![Static Badge](https://img.shields.io/badge/hono-%23E36002?style=for-the-badge&logo=Hono&logoColor=FFFFFF&link=https%3A%2F%2Fhono.dev%2F)](https://hono.dev/) 
 [![Static Badge](https://img.shields.io/badge/tailwind%20css-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=F8FAFC&link=https%3A%2F%2Ftailwindcss.com%2F)](https://tailwindcss.com/) 
 [![Static Badge](https://img.shields.io/badge/tanstack%2Freact%20query-%23FF4154?style=for-the-badge&logo=reactquery&logoColor=FFFFFF&link=https%3A%2F%2Ftanstack.com%2Fquery%2Flatest)](https://tanstack.com/query/latest) 
@@ -245,39 +245,40 @@
 - [x] `feat(api)`: add auth entities
 - [x] `feat(database)`: configurate Appwrite as database
 - [x] `feat(database)`: add session middleware
-- [x] `feet(auth)`: protect routes
-- [x] `feet`: add dashboard
-- [x] `feet(dashboard)`: add workspace forms
-- [x] `feet(workspaces)`: add image upload feature
-- [x] `feet(workspaces)`: create workspace selector
-- [x] `feet(workspaces)`: create workspace members
-- [x] `feet(workspaces)`: add create workspace responsive modal
-- [x] `feet(workspaces)`: create standalone create workspace page
-- [x] `feet(workspaces)`: build workspace settings
+- [x] `feat(auth)`: protect routes
+- [x] `feat`: add dashboard
+- [x] `feat(dashboard)`: add workspace forms
+- [x] `feat(workspaces)`: add image upload feature
+- [x] `feat(workspaces)`: create workspace selector
+- [x] `feat(workspaces)`: create workspace members
+- [x] `feat(workspaces)`: add create workspace responsive modal
+- [x] `feat(workspaces)`: create standalone create workspace page
+- [x] `feat(workspaces)`: build workspace settings
 - [x] `refactor`: refactor queries 
-- [x] `feet(workspaces)`: delete workspace
-- [x] `feet(workspaces)`: reset invite code
-- [x] `feet(workspaces)`: invite members to workspace
-- [x] `feet(workspaces)`: delete members from workspace
-- [x] `feet(workspaces)`: add workspace projects
-- [x] `feet(projects)`: create project settings
-- [x] `feet`: create task api
-- [x] `feet(tasks)`: add task form
-- [x] `feet(tasks)`: add task filters
-- [x] `feet(tasks)`: add task table
-- [x] `feet(tasks)`: add task settings
-- [x] `feet(tasks)`: add task kanban view
-- [x] `feet(tasks)`: add task kanban update API
-- [x] `feet(tasks)`: add task calendar view
-- [x] `feet(tasks)`: add task page
+- [x] `feat(workspaces)`: delete workspace
+- [x] `feat(workspaces)`: reset invite code
+- [x] `feat(workspaces)`: invite members to workspace
+- [x] `feat(workspaces)`: delete members from workspace
+- [x] `feat(workspaces)`: add workspace projects
+- [x] `feat(projects)`: create project settings
+- [x] `feat`: create task api
+- [x] `feat(tasks)`: add task form
+- [x] `feat(tasks)`: add task filters
+- [x] `feat(tasks)`: add task table
+- [x] `feat(tasks)`: add task settings
+- [x] `feat(tasks)`: add task kanban view
+- [x] `feat(tasks)`: add task kanban update API
+- [x] `feat(tasks)`: add task calendar view
+- [x] `feat(tasks)`: add task page
 - [x] `refactor`: refactor some server and client components
-- [x] `feet(projects)`: add project analytics
-- [x] `feet(workspaces)`: add workspace analytics
+- [x] `feat(projects)`: add project analytics
+- [x] `feat(workspaces)`: add workspace analytics
 - [x] `build`: resolve build errors and some fixes
-- [x] `feet(auth)`: add OAuth providers
+- [x] `feat(auth)`: add OAuth providers
 - [x] `style`: refactor application UI
-- [x] `feet(cursor)`: init
-- [x] `feet(cursor)`: update to latest version of Next.js/React and components
+- [x] `feat(cursor)`: init
+- [x] `chore(deps)`: update to latest version of Next.js/React and components
+- [x] `feat(cursor)`: add cursor module
 - [ ] `docs`: create seed file for database
 
 ## _License_
