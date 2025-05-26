@@ -21,13 +21,13 @@ export const Projects = () => {
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
         <p className="font-heading text-xs uppercase text-foreground/50">Projects</p>
-        <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
+        <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" data-cursor-scale={0.5} data-cursor-stick data-cursor-blend="exclusion" />
       </div>
       {data?.documents.map(project => {
         const href = `/workspaces/${workspaceId}/projects/${project.$id}`
         const isActive = pathname === href;
         return (
-          <Link href={href} key={project.$id}>
+          <Link href={href} key={project.$id} data-cursor-color="var(--gradient)" data-cursor-scale={2}>
             <div className={cn(
               "flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:opacity-75 transition cursor-pointer text-foreground/75",
               isActive && "bg-background shadow-sm hover:opacity-100 text-primary"

@@ -71,7 +71,7 @@ export const LoginCard = () => {
       </CardContent>
 
       <CardContent className="flex justify-center items-center text-center p-7">
-        <p>Don&apos;t have an account?&nbsp;<Link href="/register"><span className="link">Create an account</span></Link></p>
+        <p>Don&apos;t have an account?&nbsp;<Link href="/register" data-cursor-scale={0.5}><span className="link">Create an account</span></Link></p>
       </CardContent>
     </Card>
   );

@@ -50,6 +50,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        data-cursor-stick
+        data-cursor-blend="exclusion"
+        data-cursor-scale={3}
         {...props}
       />
     )

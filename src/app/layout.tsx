@@ -5,6 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/components/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
+import { Cursor } from "@/modules/cursor";
+
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -27,6 +29,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange >
           <QueryProvider>
             <Toaster />
+            <Cursor />
             {children}
           </QueryProvider>
         </ThemeProvider>

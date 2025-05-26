@@ -57,6 +57,8 @@ h6 {
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --ring: 25 65% 28%;
+
+    --cursor-color: hsl(var(--secondary-foreground));
   }
 
   .dark {

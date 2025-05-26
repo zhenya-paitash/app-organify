@@ -278,6 +278,7 @@
 - [x] `style`: refactor application UI
 - [x] `feet(cursor)`: init
 - [x] `feet(cursor)`: update to latest version of Next.js/React and components
+- [ ] `feet(cursor)`: add cursor module
 - [ ] `docs`: create seed file for database
 
 ## _License_

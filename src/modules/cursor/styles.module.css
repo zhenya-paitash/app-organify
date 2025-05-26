@@ -1,0 +1,34 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: var(--cursor-color, var(--primary));
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: var(--cursor-blend-mode, normal);
+  z-index: 9999;
+  will-change: transform;
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sticking {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.squashed {
+  border-radius: 50%;
+}
+
+.rotating {
+  transition: transform 0.1s linear;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Удаляем медиа-запросы для тем */ 

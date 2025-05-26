@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -7,14 +9,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 interface UseConfirmProps {
   title: string;
   message: string;
-  variant?: ButtonProps["variant"];
+  variant?: "default" | "destructive";
 }
 
-export const useConfirm = ({ title, message, variant = "primary" }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
+export const useConfirm = ({ title, message, variant = "default" }: UseConfirmProps): [() => JSX.Element, () => Promise<unknown>] => {
   const [promise, setPromise] = useState<{ resolve: (value: boolean) => void } | null>(null);
 
   const confirm = () => new Promise((resolve) => setPromise({ resolve }));
-  const close = () => setPromise(null);
+  const close = () => {
+    setPromise(null);
+  };
 
   const handleConfirm = () => {
     promise?.resolve(true);

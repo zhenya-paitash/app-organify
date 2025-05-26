@@ -24,7 +24,7 @@ export const WorkspaceSwitcher = () => {
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center justify-between">
         <p className="font-heading text-xs uppercase text-foreground/50">Workspaces</p>
-        <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" />
+        <IoIosAdd onClick={open} className="size-5 text-foreground/50 cursor-pointer hover:opacity-75 transition" data-cursor-stick data-cursor-scale={0.5} />
       </div>
 
       <Select onValueChange={onSelectWorkspace} value={workspaceId}>
