@@ -57,11 +57,16 @@ const config: Config = {
           '5': 'hsl(var(--chart-5))'
         },
 
-        todo: { DEFAULT: "#F9B8AB", foreground: "#A76459" },
-        progress: { DEFAULT: "#FAD59A", foreground: "#BB754B" },
-        review: { DEFAULT: "#8AAAF9", foreground: "#4d57b4" },
-        done: { DEFAULT: "#70E1BB", foreground: "#228B68" },
-        backlog: { DEFAULT: "#D5D5D6", foreground: "#5D5B61" },
+        // todo: { DEFAULT: "#F9B8AB", foreground: "#A76459" },
+        // progress: { DEFAULT: "#FAD59A", foreground: "#BB754B" },
+        // review: { DEFAULT: "#8AAAF9", foreground: "#4d57b4" },
+        // done: { DEFAULT: "#70E1BB", foreground: "#228B68" },
+        // backlog: { DEFAULT: "#D5D5D6", foreground: "#5D5B61" },
+        todo: { DEFAULT: 'hsl(11, 89%, 84%)', foreground: 'hsl(10, 31%, 50%)' },
+        progress: { DEFAULT: 'hsl(38, 92%, 80%)', foreground: 'hsl(24, 44%, 49%)' },
+        review: { DEFAULT: 'hsl(221, 91%, 76%)', foreground: 'hsl(233, 44%, 49%)' },
+        done: { DEFAULT: 'hsl(158, 65%, 69%)', foreground: 'hsl(158, 61%, 34%)' },
+        backlog: { DEFAULT: 'hsl(240, 2%, 84%)', foreground: 'hsl(255, 3%, 36%)' }
       },
       borderRadius: {
         lg: 'var(--radius)',

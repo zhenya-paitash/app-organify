@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+
 import { useAnimationFrame } from './useAnimationFrame';
 import { CursorProps, CursorState, CursorPosition, CursorVelocity, BlendMode } from '../types';
 import { DEFAULT_CURSOR_CONFIG, CURSOR_SIZE } from '../constants';

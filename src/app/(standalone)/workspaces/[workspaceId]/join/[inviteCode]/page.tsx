@@ -6,7 +6,6 @@ import { WorkspaceByIdJoinClient } from "./client";
 
 const WorkspaceByIdJoinPage = async () => {
   const user = await getCurrent();
-  console.log(user);
   if (!user) redirect("/login");
 
   return <WorkspaceByIdJoinClient />

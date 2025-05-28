@@ -16,18 +16,19 @@
 
 <!-- TODO: вставить какую-нибудь GIF или превьюшку проекта  -->
 
-## _Table of Contents_
+## Table of Contents
 
 <div align="center">
 
 [![Static Badge](https://img.shields.io/badge/About-FFCDB2?style=for-the-badge)](#about) 
 [![Static Badge](https://img.shields.io/badge/Features-FFB4A2?style=for-the-badge)](#features)
 [![Static Badge](https://img.shields.io/badge/Installation-E5989B?style=for-the-badge)](#installation)
+[![Static Badge](https://img.shields.io/badge/Legal-B5828C?style=for-the-badge)](#legal)
 [![Static Badge](https://img.shields.io/badge/License-B5828C?style=for-the-badge)](#license)
 
 </div>
 
-## _About_
+## About
 
 **Name:** Organify  
 **Description:** A time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.  
@@ -51,13 +52,13 @@
 [![Static Badge](https://img.shields.io/badge/appwrite-FD366E?style=for-the-badge&logo=appwrite&logoColor=FFFFFF&link=https%3A%2F%2Fappwrite.io%2F)](https://appwrite.io/) 
 [![Static Badge](https://img.shields.io/badge/react%20big%20calendar-FFF?style=for-the-badge&logo=square&logoColor=000&link=https%3A%2F%2Fgithub.com%2Fjquense%2Freact-big-calendar)](https://github.com/jquense/react-big-calendar)  
 
-## _Features_
+## Features
 
 > [!important]
 >
 > Add features
 
-## _Installation_
+## Installation
 
 
 <details>
@@ -232,7 +233,7 @@
 
 </details>
 
-## _TODOs_
+## TODOs
 
 - [x] `docs`: initial documentation
 - [x] `init`: project setup
@@ -279,8 +280,14 @@
 - [x] `feat(cursor)`: init
 - [x] `chore(deps)`: update to latest version of Next.js/React and components
 - [x] `feat(cursor)`: add cursor module
+- [x] `style`: small ui changes
 - [ ] `docs`: create seed file for database
 
-## _License_
+## Legal
+
+- [Terms of Use](docs/TERMS.md)
+- [Privacy Policy](docs/PRIVACY.md)
+
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

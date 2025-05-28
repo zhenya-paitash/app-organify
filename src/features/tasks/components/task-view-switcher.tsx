@@ -51,9 +51,9 @@ export const TaskViewSwitcher = ({ hideProjectFilter }: TaskViewSwitcherProps) =
       <div className="h-full flex flex-col overflow-auto p-4">
         <div className="flex flex-col gap-y-2 lg:flex-row items-center justify-between">
           <TabsList className="w-full lg:w-auto font-heading">
-            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="table">Table</TabsTrigger>
-            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="kanban">Kanban</TabsTrigger>
-            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="calendar">Calendar</TabsTrigger>
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="table" data-cursor-stick data-cursor-scale={0.5}>Table</TabsTrigger>
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="kanban" data-cursor-stick data-cursor-scale={0.5}>Kanban</TabsTrigger>
+            <TabsTrigger className="w-full min-w-32 h-8 lg:w-auto" value="calendar" data-cursor-stick data-cursor-scale={0.5}>Calendar</TabsTrigger>
           </TabsList>
           <Button onClick={open} className="w-full lg:w-auto" size="xs"><TiPlus className="size-4 mr-2" />Add Task</Button>
         </div>

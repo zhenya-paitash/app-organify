@@ -1,6 +1,6 @@
 "use client";
 
-import { differenceInDays, format } from "date-fns";
+import { differenceInDays, format, startOfDay } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -17,11 +17,12 @@ const TaskDateVariant = {
 } as const;
 
 export const TaskDate = ({ value, className, variant }: TaskDateProps) => {
-  const [today, endDate] = [new Date(), new Date(value)];
+  const [today, endDate] = [startOfDay(new Date()), startOfDay(new Date(value))];
   const diffInDays = differenceInDays(endDate, today);
 
   let [fgColor, bgColor] = ["text-backlog-foreground/80 dark:text-backlog/50", "bg-backlog-foreground/10 dark:bg-backlog/20"];
-  if (diffInDays <= 2) { fgColor = "text-red-500"; bgColor = "bg-red-200/75 dark:bg-red-800/50"; }
+  if (diffInDays < 0) { fgColor = "text-muted-foreground", bgColor = "bg-muted-foreground/10 dark:bg-muted/20"; }
+  else if (diffInDays <= 2) { fgColor = "text-red-500"; bgColor = "bg-red-200/75 dark:bg-red-800/50"; }
   else if (diffInDays <= 5) { fgColor = "text-red-400"; bgColor = "bg-red-100/75 dark:bg-red-500/50"; }
   else if (diffInDays <= 7) { fgColor = "text-orange-500"; bgColor = "bg-orange-100/75 dark:bg-orange-800/50"; }
   else if (diffInDays <= 14) { fgColor = "text-orange-400 dark:text-orange-300"; bgColor = "bg-yellow-100/75 dark:bg-yellow-600/50"; }
@@ -29,15 +30,17 @@ export const TaskDate = ({ value, className, variant }: TaskDateProps) => {
 
 
   if (variant === TaskDateVariant.DIFF_IN_DAYS) {
-    const text = diffInDays === 0 ? "Today" :
-      diffInDays === 1 ? "Tomorrow" :
-        diffInDays > 1 ? `${diffInDays} days left` :
-          `${Math.abs(diffInDays)} days ago`;
+    const getDisplayText = () => {
+      if (diffInDays === 0) return "Today";
+      if (diffInDays === 1) return "Tomorrow";
+      if (diffInDays > 1) return `${diffInDays} days left`;
+      return `${Math.abs(diffInDays)} days ago`;
+    };
 
     return (
       <div className={cn(fgColor, "text-xs")}>
         <Badge variant="outline" className={cn(bgColor, fgColor, "truncate border-none", className)}>
-          <span className={cn("truncate", className)}>{text}</span>
+          <span className={cn("truncate", className)}>{getDisplayText()}</span>
         </Badge>
       </div>
     );

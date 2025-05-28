@@ -8,19 +8,15 @@ export const useAnimationFrame = (callback: (time: number) => void) => {
 
   useEffect(() => {
     const animate = (time: number) => {
-      if (previousTimeRef.current !== undefined) {
-        callback(time);
-      }
+      if (previousTimeRef.current !== undefined) callback(time);
       previousTimeRef.current = time;
-      requestRef.current = requestAnimationFrame(animate);
+      // requestRef.current = requestAnimationFrame(animate);
     };
 
     requestRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, [callback]);
 }; 

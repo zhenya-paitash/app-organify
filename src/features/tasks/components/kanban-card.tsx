@@ -45,7 +45,9 @@ export const KanbanCard = ({ task }: KanbanCardProps) => {
           </div>
           <div className="flex items-center gap-x-1.5 text-xs font-medium group relative">
             <MemberAvatar name={task.executor.name} fallbackClassName="text-[10px]" />
-            <span className="opacity-0 group-hover:opacity-100 absolute right-6 transition-all duration-200 text-xs font-medium text-muted-foreground bg-background/90 px-2 py-1 rounded shadow-sm">{task.executor.name}</span>
+            <span className="opacity-0 group-hover:opacity-100 absolute right-6 transition-all duration-200 delay-200 text-xs font-medium text-popover-foreground/90 bg-popover/75 px-4 py-2 rounded-sm shadow-sm whitespace-nowrap z-50 pointer-events-none">
+              {task.executor.name}
+            </span>
           </div>
         </div>
       </div>

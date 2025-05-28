@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 export default async function TermsPage() {
-  const termsPath = path.join(process.cwd(), 'TERMS.md');
+  const termsPath = path.join(process.cwd(), 'docs', 'TERMS.md');
   const termsMarkdown = readFileSync(termsPath, 'utf8');
 
   return (

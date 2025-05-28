@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 export default async function PolicyPage() {
-  const privacyPolicyPath = path.join(process.cwd(), 'PRIVACY.md');
+  const privacyPolicyPath = path.join(process.cwd(), 'docs', 'PRIVACY.md');
   const privacyPolicyMarkdown = readFileSync(privacyPolicyPath, 'utf8');
 
   return (

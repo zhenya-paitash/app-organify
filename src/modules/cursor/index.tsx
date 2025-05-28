@@ -1,10 +1,14 @@
 'use client';
 
 import { useRef } from 'react';
+
+import { cn } from '@/lib/utils';
+
 import { useCursor } from './hooks/useCursor';
+
 import { CursorProps } from './types';
 import { CURSOR_SIZE } from './constants';
-import { cn } from '@/lib/utils';
+
 import styles from './styles.module.css';
 
 export const Cursor: React.FC<CursorProps> = (props) => {
