@@ -150,22 +150,21 @@
     ╭────────────────────────────────────────────────────────────────╮
     │ .env.local                                                     │
     │────────────────────────────────────────────────────────────────│
-    │  1 # APP                                                       │
+    │  1 # App Settings                                              │
     │  2 NEXT_PUBLIC_APP_URL=http://localhost:3000                   │
-    │  3                                                             │
+    │  3 NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1  │
     │  4                                                             │
-    │  5 # DATABASE                                                  │
-    │  6 NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1  │
+    │  5 # Appwrite Init                                             │
+    │  6 NEXT_APPWRITE_KEY=                                          │
     │  7 NEXT_PUBLIC_APPWRITE_PROJECT=                               │
     │  8                                                             │
-    │  9 NEXT_PUBLIC_APPWRITE_DATABASE_ID=                           │
-    │ 10 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=                         │
-    │ 11 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=                            │
-    │ 12 NEXT_PUBLIC_APPWRITE_PROJECTS_ID=                           │
-    │ 13 NEXT_PUBLIC_APPWRITE_TASKS_ID=                              │
-    │ 14 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=                      │
-    │ 15                                                             │
-    │ 16 NEXT_APPWRITE_KEY=                                          │
+    │  9 # Appwrite Database                                         │
+    │ 10 NEXT_PUBLIC_APPWRITE_DATABASE_ID=                           │
+    │ 11 NEXT_PUBLIC_APPWRITE_WORKSPACES_ID=                         │
+    │ 12 NEXT_PUBLIC_APPWRITE_MEMBERS_ID=                            │
+    │ 13 NEXT_PUBLIC_APPWRITE_PROJECTS_ID=                           │
+    │ 14 NEXT_PUBLIC_APPWRITE_TASKS_ID=                              │
+    │ 15 NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=                      │
     ╰────────────────────────────────────────────────────────────────╯
     ```
 
@@ -281,6 +280,7 @@
 - [x] `chore(deps)`: update to latest version of Next.js/React and components
 - [x] `feat(cursor)`: add cursor module
 - [x] `style`: small ui changes
+- [x] `feat(database)`: add initial seed data
 - [ ] `docs`: create seed file for database
 
 ## Legal
