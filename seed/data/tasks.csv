@@ -1,0 +1,12 @@
+name,project,status,dueDate,description,executor
+build MVP for new app,pet-projects,IN_PROGRESS,2024-12-10,Create the core functionality for the MVP,admin@organify.com
+design UI for landing page,pet-projects,TODO,2024-12-15,Design the main layout and visual elements,designer@organify.com
+set up authentication,pet-projects,BACKLOG,2025-01-05,Implement login and registration features,admin@organify.com
+schedule annual health check,health,TODO,2024-11-01,Book a general health screening,admin@organify.com
+meditate 10 minutes daily,health,IN_PROGRESS,2024-12-31,Build a habit of daily meditation,admin@organify.com
+morning stretching routine,workout,TODO,2024-06-05,Do a 10-minute stretch every morning,admin@organify.com
+join local gym,workout,BACKLOG,2024-06-15,Find and sign up for a nearby gym,admin@organify.com
+take English grammar lesson,english-lessons,TODO,2024-06-10,Focus on verb tenses,admin@organify.com
+practice speaking with tutor,english-lessons,IN_PROGRESS,2024-06-20,30-minute Zoom session,admin@organify.com
+watch English documentary,english-lessons,TODO,2024-07-01,Choose topic: science or history,admin@organify.com
+clean kitchen,household,TODO,2024-06-02,Deep clean all surfaces and fridge,admin@organify.com
