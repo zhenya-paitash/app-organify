@@ -91,7 +91,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
       <ResetInviteDialog />
       <Card className="w-full h-full border-none shadow-none">
         <CardHeader className="flex flex-row items-center gap-x-4 p-7 space-y-0">
-          <Button size="sm" variant="secondary" onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}>
+          <Button size="xs" variant="ghost" onClick={onCancel ? onCancel : () => router.push(`/workspaces/${initialValues.$id}`)}>
             <ArrowLeftIcon className="size-4 mr-2" />Back
           </Button>
           <CardTitle className="text-xl font-bold">{initialValues.name}</CardTitle>
@@ -138,8 +138,8 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                 <Separator className="py-7" />
 
                 <div className="flex items-cdenter justify-between">
-                  <Button type="button" variant="secondary" size="lg" onClick={onCancel} disabled={isPending} className={cn(!onCancel && "invisible")}>Cancel</Button>
-                  <Button type="submit" variant="primary" size="lg" disabled={isPending}>Save changes</Button>
+                  <Button type="button" variant="secondary" size="sm" onClick={onCancel} disabled={isPending} className={cn(!onCancel && "invisible")}>Cancel</Button>
+                  <Button type="submit" variant="primary" size="sm" disabled={isPending}>Save changes</Button>
                 </div>
               </form>
             </Form>

@@ -10,7 +10,7 @@ The seeder is organized into several modular classes using an object-oriented ap
 - **Seeder** (seeder.ts) - Main seeder class that orchestrates the seeding process
 - **AppwriteService** (appwrite-service.ts) - Service class for interacting with Appwrite API
 - **CsvLoader** (csv-loader.ts) - Class for loading and parsing CSV files
-- **EnvManager** (env-manager.ts) - Class for managing environment variables
+- **Config** (config.ts) - Configuration management class
 - **Logger** (logger.ts) - OOP-based colorful logger with different message levels
 - **Utils** (utils.ts) - Class with static utility methods
 - **AppwriteDropper** (drop.ts) - Class for dropping all Appwrite resources
@@ -21,9 +21,9 @@ Seed data is stored in CSV format in the `seed/data/` directory:
 
 - **users.csv** - User data (name, email, password)
 - **workspaces.csv** - Workspace data
-- **members.csv** - Workspace membership data
+- **members.csv** - Workspace membership data (roles: ADMIN, MEMBER)
 - **projects.csv** - Project data
-- **tasks.csv** - Task data
+- **tasks.csv** - Task data (statuses: BACKLOG, TODO, IN_PROGRESS, IN_REVIEW, DONE)
 
 **Important:** If your CSV data contains commas within fields, you need to escape them with a backslash (e.g., `Sort tools\, donate unused items`) or enclose the entire field in quotes.
 
@@ -36,21 +36,21 @@ Images for workspaces and projects are stored in the `seed/img/` directory. Thes
 To run database seeding (create structure and populate with data):
 
 ```bash
-npm run seed
+bun run seed
 ```
 
 This will:
 1. Prompt for Appwrite Project ID and API Key
 2. Create/update necessary database, collections, and storage buckets
 3. Seed users, workspaces, members, projects, and tasks
-4. Create a `.env.local` file with all necessary Appwrite resource IDs
+4. Create a `.env` file with all necessary Appwrite resource IDs
 
 To initialize database structure only (without populating data):
 
 ```bash
-npm run seed:init
+bun run seed:init
 # or
-npm run seed -- --init
+bun run seed -- --init
 ```
 
 This will:
@@ -62,7 +62,7 @@ This will:
 To delete all data:
 
 ```bash
-npm run seed:drop
+bun run seed:drop
 ```
 
 This will:
@@ -82,4 +82,6 @@ This will:
   - Green: Success messages
   - Red: Error messages
   - Gray: Informational messages
-  - Blue: Input prompts 
+  - Blue: Input prompts
+- **Centralized Configuration**: All constants and configuration values are managed in `config.ts`
+- **Type Safety**: Strong typing for database collections, member roles, and task statuses

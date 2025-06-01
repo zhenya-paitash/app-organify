@@ -25,7 +25,7 @@ export const ProjectAvatar = ({ name, image, className, fallbackClassName }: Pro
 
   return (
     <Avatar className={cn("size-5 rounded-sm", className)}>
-      <AvatarFallback className={cn("text-primary bg-secondary font-semibold text-sm uppercase rounded-sm", fallbackClassName)}>{name[0]}</AvatarFallback>
+      <AvatarFallback className={cn("text-primary bg-secondary font-semibold text-xs uppercase rounded-sm", fallbackClassName)}>{name[0]}</AvatarFallback>
     </Avatar>
   );
 }

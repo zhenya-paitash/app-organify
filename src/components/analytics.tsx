@@ -1,56 +1,67 @@
 import { ProjectAnalyticsResponseType } from "@/features/projects/api/use-get-project-analytics";
 import { WorkspaceAnalyticsResponseType } from "@/features/workspaces/api/use-get-workspace-analytics";
 
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { AnalyticsCard } from "./analytics-card";
 
-export const Analytics = ({ data }: ProjectAnalyticsResponseType | WorkspaceAnalyticsResponseType) => {
-  return (
-    <ScrollArea className="w-full border-none rounded-lg whitespace-nowrap shrink-0">
-      <div className="w-full flex flex-row gap-x-2.5 pb-4">
-        <div className="flex flex-1 items-center">
-          <AnalyticsCard
-            title="Total Tasks"
-            value={data.task.count}
-            increaseValue={data.task.diff}
-            variant={data.task.diff > 0 ? "increase" : "decrease"}
-          />
-        </div>
-        <div className="flex flex-1 items-center">
-          <AnalyticsCard
-            title="Executor Tasks"
-            value={data.task.executor.count}
-            increaseValue={data.task.executor.diff}
-            variant={data.task.executor.diff > 0 ? "increase" : "decrease"}
-          />
-        </div>
-        <div className="flex flex-1 items-center">
-          <AnalyticsCard
-            title="Completed Tasks"
-            value={data.task.completed.count}
-            increaseValue={data.task.completed.diff}
-            variant={data.task.completed.diff > 0 ? "increase" : "decrease"}
-          />
-        </div>
-        <div className="flex flex-1 items-center">
-          <AnalyticsCard
-            title="Overdue Tasks"
-            value={data.task.overdue.count}
-            increaseValue={data.task.overdue.diff}
-            variant={data.task.overdue.diff > 0 ? "increase" : "decrease"}
-          />
-        </div>
-        <div className="flex flex-1 items-center">
-          <AnalyticsCard
-            title="Incomplete Tasks"
-            value={data.task.incomplete.count}
-            increaseValue={data.task.incomplete.diff}
-            variant={data.task.incomplete.diff > 0 ? "increase" : "decrease"}
-          />
-        </div>
-      </div>
-      <ScrollBar orientation="horizontal" />
-    </ScrollArea>
-  );
+type AnalyticsCardVariant = "increase" | "decrease";
+
+interface AnalyticsProps {
+  data: (ProjectAnalyticsResponseType | WorkspaceAnalyticsResponseType)['data'];
+  className?: string;
 }
 
+const getVariant = (value: number, invert = false): AnalyticsCardVariant => {
+  const isIncrease = value >= 0;
+  return (invert ? !isIncrease : isIncrease) ? 'increase' : 'decrease';
+};
+
+export const Analytics = ({ data, className }: AnalyticsProps) => {
+  const cards = [
+    {
+      title: "Total Tasks",
+      value: data.task.count,
+      increaseValue: Math.abs(data.task.diff),
+      variant: getVariant(data.task.diff),
+    },
+    {
+      title: "Executor Tasks",
+      value: data.task.executor.count,
+      increaseValue: Math.abs(data.task.executor.diff),
+      variant: getVariant(data.task.executor.diff),
+    },
+    {
+      title: "Completed Tasks",
+      value: data.task.completed.count,
+      increaseValue: Math.abs(data.task.completed.diff),
+      variant: getVariant(data.task.completed.diff),
+    },
+    {
+      title: "Overdue Tasks",
+      value: data.task.overdue.count,
+      increaseValue: Math.abs(data.task.overdue.diff),
+      variant: getVariant(data.task.overdue.diff, true), // Invert variant for overdue
+    },
+    {
+      title: "Incomplete Tasks",
+      value: data.task.incomplete.count,
+      increaseValue: Math.abs(data.task.incomplete.diff),
+      variant: getVariant(data.task.incomplete.diff, true), // Invert variant for incomplete
+    },
+  ] as const;
+
+  return (
+    <div className={className}>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {cards.map((card, index) => (
+          <AnalyticsCard
+            key={index}
+            title={card.title}
+            value={card.value}
+            increaseValue={card.increaseValue}
+            variant={card.variant}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};

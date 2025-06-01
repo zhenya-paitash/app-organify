@@ -12,11 +12,11 @@ interface RouteConfig {
 }
 
 const ROUTE_CONFIG: Record<string, RouteConfig> = {
-  default: { title: "Home", description: "Dashboard homepage" },
-  tasks: { title: "Tasks", description: "Manage your todos" },
+  default: { title: "Dashboard", description: "Dashboard homepage" },
+  tasks: { title: "Tasks", description: "Manage your tasks and view them in different layouts" },
   projects: { title: "Projects", description: "Currently active project" },
   settings: { title: "Settings", description: "Configure settings" },
-  members: { title: "Members", description: "Manage workspace users" },
+  members: { title: "Team", description: "Manage workspace users" },
   create: { title: "Create", description: "Create New Workspace" },
 } as const;
 

@@ -1,6 +1,4 @@
 <div align="center">
-<!-- TODO: добавить оглавление для быстрого перехода к параграфу -->
-
   <img src="readme-assets/logo.webp" width="20%" alt="Organify Logo">
   <h1>Organify</h1>
   <h4><i>Own your time. We're here to help.</i></h4>
@@ -36,7 +34,7 @@
 **Year:** 2025  
 **Stack:** 
 
-[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=^1.2.14&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
+[![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=^1.2.15&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
 [![Static Badge](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF&label=^5&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://www.typescriptlang.org/) 
 [![Static Badge](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=FFFFFF&label=^15.3&labelColor=000000&link=https%3A%2F%2Fnextjs.org%2F)](https://nextjs.org/) 
 [![Static Badge](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=282C34&label=^19.1&labelColor=61DAFB&link=https%3A%2F%2Fru.legacy.reactjs.org%2F)](https://legacy.reactjs.org/) 
@@ -283,6 +281,7 @@
 - [x] `feat(database)`: add initial seed data
 - [x] `feat(api)`: improved server-side deletion logic
 - [x] `refactor`: reorganize project structure and documentation
+- [x] `style(ui)`: apply minor UI improvements
 - [ ] `docs`: create seed file for database
 
 ## Legal

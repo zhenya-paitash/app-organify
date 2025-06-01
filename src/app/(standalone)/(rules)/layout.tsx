@@ -14,7 +14,7 @@ const StandaloneLayout = ({ children }: StandaloneLayoutProps) => {
     <main className="bg-background/10 min-h-screen">
       <div className="mx-auto max-w-screen-2xl p-4">
         <nav className="flex justify-between items-center h-[73px]">
-          <Button variant="secondary" onClick={() => window.history.back()}>
+          <Button variant="primary" onClick={() => window.history.back()}>
             <ChevronLeftIcon />Back
           </Button>
           <div className="flex gap-4">

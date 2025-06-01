@@ -24,7 +24,7 @@ export const TaskOverview = ({ task }: TaskOverviewProps) => {
       <div className="bg-muted rounded-lg p-4">
         <div className="flex items-center justify-between">
           <p className="text-lg font-semibold">Overview</p>
-          <Button size="sm" variant="secondary" onClick={() => open(task.$id)}>
+          <Button size="xs" variant="secondary" onClick={() => open(task.$id)}>
             <PencilIcon className="size-4 mr-2" />Edit
           </Button>
         </div>

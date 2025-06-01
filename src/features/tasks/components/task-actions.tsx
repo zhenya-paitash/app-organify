@@ -50,7 +50,11 @@ export const TaskActions = ({ id, projectId, workspaceId, children }: TaskAction
             <PencilIcon className="size-4 mr-2 stroke-2" />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="text-destructive focus:text-destructive font-medium p-[10px]" onClick={handleDeleteTask} disabled={isDeletingTask}>
+          <DropdownMenuItem
+            className="text-destructive focus:bg-destructive/10 focus:text-destructive font-medium p-[10px]"
+            onClick={handleDeleteTask}
+            disabled={isDeletingTask}
+          >
             <TrashIcon className="size-4 mr-2 stroke-2" />
             Delete
           </DropdownMenuItem>

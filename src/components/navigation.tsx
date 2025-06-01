@@ -19,9 +19,9 @@ interface Route {
 }
 
 const routes: Route[] = [
-  { label: "Home", href: "", icon: GoHome, activeIcon: GoHomeFill },
+  { label: "Dashboard", href: "", icon: GoHome, activeIcon: GoHomeFill },
   { label: "Tasks", href: "/tasks", icon: GoCheckCircle, activeIcon: GoCheckCircleFill },
-  { label: "Members", href: "/members", icon: UsersIcon, activeIcon: UsersIcon }, 
+  { label: "Team", href: "/members", icon: UsersIcon, activeIcon: UsersIcon }, 
   { label: "Settings", href: "/settings", icon: SettingsIcon, activeIcon: SettingsIcon },
 ];
 

@@ -35,7 +35,7 @@ export const Projects = () => {
         const href = `/workspaces/${workspaceId}/projects/${project.$id}`
         const isActive = pathname === href;
         return (
-          <Link href={href} key={project.$id} data-cursor-color="var(--gradient)" data-cursor-scale={2}>
+          <Link href={href} key={project.$id}>
             <div className={cn(
               "group flex items-center gap-2.5 p-2.5 rounded-md font-medium hover:opacity-75 transition cursor-pointer text-foreground/75 relative",
               isActive && "bg-background shadow-sm hover:opacity-100 text-primary"
@@ -45,7 +45,7 @@ export const Projects = () => {
               <button
                 onClick={(e) => handleEdit(e, project.$id)}
                 className="absolute right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                data-cursor-scale={0.5}
+                data-cursor-stick
               >
                 <Settings2 className="size-4 text-foreground/50 hover:text-foreground/75 transition-colors" />
               </button>
