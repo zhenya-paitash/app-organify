@@ -281,6 +281,7 @@
 - [x] `feat(cursor)`: add cursor module
 - [x] `style`: small ui changes
 - [x] `feat(database)`: add initial seed data
+- [x] `feat(api)`: improved server-side deletion logic
 - [ ] `docs`: create seed file for database
 
 ## Legal

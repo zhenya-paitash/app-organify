@@ -223,7 +223,12 @@ const app = new Hono()
     const member = await getMember({ databases, workspaceId: existingProject.workspaceId, userId: user.$id });
     if (!member) return c.json({ error: "Unauthorized" }, 401);
 
-    // TODO: DEL tasks
+    // Delete all tasks related to the project
+    const tasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [Query.equal("projectId", projectId)]);
+    for (const task of tasks.documents) {
+      await databases.deleteDocument(DATABASE_ID, TASKS_ID, task.$id);
+    }
+
     await databases.deleteDocument(DATABASE_ID, PROJECTS_ID, projectId);
 
     return c.json({ data: { $id: existingProject.$id } });

@@ -21,13 +21,12 @@ export const TaskDate = ({ value, className, variant }: TaskDateProps) => {
   const diffInDays = differenceInDays(endDate, today);
 
   let [fgColor, bgColor] = ["text-backlog-foreground/80 dark:text-backlog/50", "bg-backlog-foreground/10 dark:bg-backlog/20"];
-  if (diffInDays < 0) { fgColor = "text-muted-foreground", bgColor = "bg-muted-foreground/10 dark:bg-muted/20"; }
+  if (diffInDays < 0) { fgColor = "text-muted-foreground"; bgColor = "bg-muted-foreground/10 dark:bg-muted/20"; }
   else if (diffInDays <= 2) { fgColor = "text-red-500"; bgColor = "bg-red-200/75 dark:bg-red-800/50"; }
   else if (diffInDays <= 5) { fgColor = "text-red-400"; bgColor = "bg-red-100/75 dark:bg-red-500/50"; }
   else if (diffInDays <= 7) { fgColor = "text-orange-500"; bgColor = "bg-orange-100/75 dark:bg-orange-800/50"; }
   else if (diffInDays <= 14) { fgColor = "text-orange-400 dark:text-orange-300"; bgColor = "bg-yellow-100/75 dark:bg-yellow-600/50"; }
   ;
-
 
   if (variant === TaskDateVariant.DIFF_IN_DAYS) {
     const getDisplayText = () => {

@@ -3,7 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { ID, Query } from "node-appwrite";
 
-import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, TASKS_ID, WORKSPACES_ID } from "@/config";
+import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID, WORKSPACES_ID } from "@/config";
 import { DateManager } from "@/lib/date-manager";
 import { sessionMiddleware } from "@/lib/session-middleware";
 import { generateInviteCode } from "@/lib/utils";
@@ -248,10 +248,31 @@ const app = new Hono()
     const member = await getMember({ databases, workspaceId, userId: user.$id });
     if (!member || member.role !== MemberRole.ADMIN) return c.json({ error: "Unauthorized" }, 401);
 
-    // TODO: DEL members
-    // TODO: DEL projects
-    // TODO: DEL tasks
-    // DELETE workspace
+    // Get all projects in the workspace
+    const projects = await databases.listDocuments(DATABASE_ID, PROJECTS_ID, [Query.equal("workspaceId", workspaceId)]);
+
+    // Delete all tasks related to the project
+    for (const project of projects.documents) {
+      const tasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [Query.equal("projectId", project.$id)]);
+      for (const task of tasks.documents) {
+        await databases.deleteDocument(DATABASE_ID, TASKS_ID, task.$id);
+      }
+      await databases.deleteDocument(DATABASE_ID, PROJECTS_ID, project.$id);
+    }
+
+    // Delete all tasks related to the workspace that may remain
+    const remainingTasks = await databases.listDocuments(DATABASE_ID, TASKS_ID, [Query.equal("workspaceId", workspaceId)]);
+    for (const task of remainingTasks.documents) {
+      await databases.deleteDocument(DATABASE_ID, TASKS_ID, task.$id);
+    }
+
+    // Delete all members of the workspace
+    const members = await databases.listDocuments(DATABASE_ID, MEMBERS_ID, [Query.equal("workspaceId", workspaceId)]);
+    for (const member of members.documents) {
+      await databases.deleteDocument(DATABASE_ID, MEMBERS_ID, member.$id);
+    }
+
+    // Delete the workspace
     await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
 
     return c.json({ data: { $id: workspaceId } });
