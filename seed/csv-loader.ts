@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import logger from './logger';
 
 /**
- * Data types for CSV files
+ * User data interface
  */
 export interface UserCSV {
   name: string;
@@ -12,26 +12,38 @@ export interface UserCSV {
   avatar?: string;
 }
 
+/**
+ * Workspace data interface
+ */
 export interface WorkspaceCSV {
   name: string;
   imageUrl?: string;
 }
 
+/**
+ * Project data interface
+ */
 export interface ProjectCSV {
   name: string;
   workspace: string;
   imageUrl?: string;
 }
 
+/**
+ * Task data interface
+ */
 export interface TaskCSV {
   name: string;
-  project: string;
   status: 'BACKLOG' | 'TODO' | 'IN_PROGRESS' | 'IN_REVIEW' | 'DONE';
   dueDate: string;
-  description?: string;
+  project: string;
   executor: string;
+  description?: string;
 }
 
+/**
+ * Member data interface
+ */
 export interface MemberCSV {
   email: string;
   workspace: string;
@@ -48,21 +60,21 @@ export class CsvLoader {
    * @returns Array of objects with parsed CSV data
    */
   static loadCsv<T>(filePath: string): T[] {
-  try {
-    if (!existsSync(filePath)) {
+    try {
+      if (!existsSync(filePath)) {
         logger.error(`File not found: ${filePath}`);
-      return [];
-    }
+        return [];
+      }
 
-    const content = readFileSync(filePath, 'utf-8');
-    const lines = content.split('\n').filter(line => line.trim() !== '');
+      const content = readFileSync(filePath, 'utf-8');
+      const lines = content.split('\n').filter(line => line.trim() !== '');
 
-    if (lines.length === 0) {
+      if (lines.length === 0) {
         logger.error(`File ${filePath} is empty`);
-      return [];
-    }
+        return [];
+      }
 
-    const headers = lines[0].split(',').map(header => header.trim());
+      const headers = lines[0].split(',').map(header => header.trim());
 
       return lines.slice(1).map(line => {
         // Use a more reliable CSV parsing approach
@@ -86,34 +98,34 @@ export class CsvLoader {
         // Don't forget the last value
         values.push(currentValue.trim());
 
-      const record: Record<string, string> = {};
+        const record: Record<string, string> = {};
 
-      headers.forEach((header, index) => {
+        headers.forEach((header, index) => {
           // Make sure we don't go out of bounds
           record[header] = index < values.length ? values[index] : '';
+        });
+
+        return record as unknown as T;
       });
-
-      return record as unknown as T;
-    });
-  } catch (error) {
+    } catch (error) {
       logger.error(`Error loading data from ${filePath}: ${error}`);
-    return [];
+      return [];
+    }
   }
-}
 
-/**
-   * Load all CSV files from data directory
-   * @returns Object containing all loaded data
- */
+  /**
+     * Load all CSV files from data directory
+     * @returns Object containing all loaded data
+   */
   static loadAllCsvData() {
     const dataDir = join(process.cwd(), 'seed', 'data');
 
-  return {
+    return {
       users: this.loadCsv<UserCSV>(join(dataDir, 'users.csv')),
       workspaces: this.loadCsv<WorkspaceCSV>(join(dataDir, 'workspaces.csv')),
       members: this.loadCsv<MemberCSV>(join(dataDir, 'members.csv')),
       projects: this.loadCsv<ProjectCSV>(join(dataDir, 'projects.csv')),
       tasks: this.loadCsv<TaskCSV>(join(dataDir, 'tasks.csv'))
-  };
+    };
   }
 } 

@@ -1,7 +1,7 @@
 <div align="center">
 <!-- TODO: добавить оглавление для быстрого перехода к параграфу -->
 
-  <img src="preview/logo.webp" width="100" alt="Organify Logo">
+  <img src="readme-assets/logo.webp" width="20%" alt="Organify Logo">
   <h1>Organify</h1>
   <h4><i>Own your time. We're here to help.</i></h4>
   <a href="https://choosealicense.com/licenses/mit/"><img src="https://img.shields.io/badge/MIT-3DA638?style=for-the-badge&label=license&link=https%3A%2F%2Fchoosealicense.com%2Flicenses%2Fmit%2F"></a>
@@ -33,7 +33,7 @@
 **Name:** Organify  
 **Description:** A time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.  
 **Slogan:** *Own your time. We're here to help.*  
-**Year:** 2024  
+**Year:** 2025  
 **Stack:** 
 
 [![Static Badge](https://img.shields.io/badge/bun-F9F1E1?style=for-the-badge&logo=bun&logoColor=%23000000&label=^1.2.14&labelColor=F9F1E1&link=https%3A%2F%2Fwww.typescriptlang.org%2F)](https://bun.sh/) 
@@ -70,22 +70,22 @@
 1. Создать **аккаунт** на [Appwrite](https://appwrite.io/)
 
 2. Создать **проект**  
-<img src="preview/database-2.webp" width="100%" alt="Appwrite project"><br/>
+<img src="readme-assets/database-2.webp" width="100%" alt="Appwrite project"><br/>
 
 3. Создать **ключи API** с привилегиями и добавить значения в `.env.local` файл  
 
     - copy `NEXT_PUBLIC_APPWRITE_ENDPOINT` & `NEXT_PUBLIC_APPWRITE_PROJECT`
-    <img src="preview/database-3-1.webp" width="100%" alt="Apprite project & Appwrite endpoint"><br/>
+    <img src="readme-assets/database-3-1.webp" width="100%" alt="Apprite project & Appwrite endpoint"><br/>
 
     - copy `NEXT_APPWRITE_KEY`
-    <img src="preview/database-3-2.webp" width="100%" alt="Appwrite api key"><br/>
+    <img src="readme-assets/database-3-2.webp" width="100%" alt="Appwrite api key"><br/>
 
 4. Create **database**
 
     - **Appwrite** > `<your organization>` > `<your project>` > **Databases** > **Create Database**
 
     - copy `NEXT_PUBLIC_APPWRITE_DATABASE_ID`
-    <img src="preview/database-4-1.webp" width="100%" alt="Appwrite database id"><br/>
+    <img src="readme-assets/database-4-1.webp" width="100%" alt="Appwrite database id"><br/>
 
 5. Create **collection**
 
@@ -98,7 +98,7 @@
         - attribute `imageUrl` type `string` size `1400000`
 
         - copy `NEXT_PUBLIC_APPWRITE_WORKSPACES_ID`
-        <img src="preview/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
+        <img src="readme-assets/database-5-1.webp" width="100%" alt="Appwrite workspace collection id"><br/>
 
     - create `members` collection
         - attribute `userId` type `string` size `50` `required`
@@ -135,14 +135,14 @@
 6. Create **storage** 
 
     - **Appwrite** > `<your organization>` > `<your project>` > **Storage** > **Create Storage**
-    <img src="preview/database-6-1.webp" width="100%" alt="Appwrite storage images"><br/>
+    <img src="readme-assets/database-6-1.webp" width="100%" alt="Appwrite storage images"><br/>
 
     - copy `NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID`
-    <img src="preview/database-6-2.webp" width="100%" alt="Appwrite storage images bucket id"><br/>
+    <img src="readme-assets/database-6-2.webp" width="100%" alt="Appwrite storage images bucket id"><br/>
 
     - configurate settings 
-    <img src="preview/database-6-3.webp" width="100%" alt="Appwrite storage images permissions"><br/>
-    <img src="preview/database-6-4.webp" width="100%" alt="Appwrite storage images size & filetypes"><br/>
+    <img src="readme-assets/database-6-3.webp" width="100%" alt="Appwrite storage images permissions"><br/>
+    <img src="readme-assets/database-6-4.webp" width="100%" alt="Appwrite storage images size & filetypes"><br/>
 
 7. Add the following values to `@/.env.local` file
 
@@ -282,6 +282,7 @@
 - [x] `style`: small ui changes
 - [x] `feat(database)`: add initial seed data
 - [x] `feat(api)`: improved server-side deletion logic
+- [x] `refactor`: reorganize project structure and documentation
 - [ ] `docs`: create seed file for database
 
 ## Legal

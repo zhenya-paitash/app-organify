@@ -74,7 +74,7 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)'
       },
       backgroundImage: {
-        'noise-light': "url('/noise-light.png')",
+        'noise-light': "url('/noise-light.webp')",
       },
     }
   },

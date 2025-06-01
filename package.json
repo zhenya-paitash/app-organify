@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "posting": "posting --env .env.local --collection ./REST/",
+    "posting": "posting --env .env.local --collection ./docs/examples/rest/",
     "seed": "bun run seed/index.ts",
-    "seed:drop": "bun run seed/drop.ts",
-    "seed:init": "bun run seed/index.ts --init"
+    "seed:init": "bun run seed/index.ts --init",
+    "seed:drop": "bun run seed/drop.ts"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",

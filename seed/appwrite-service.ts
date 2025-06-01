@@ -1,6 +1,7 @@
 import { Client, Databases, Storage, ID, Users, Query } from 'node-appwrite';
 import { readFileSync } from 'node:fs';
 import logger from './logger';
+import { COLLECTIONS, MEMBER_ROLES, TASK_STATUS } from './config';
 
 /**
  * Appwrite service class for interacting with Appwrite API
@@ -127,7 +128,7 @@ export class AppwriteService {
       logger.info(`Creating attributes for collection '${collectionName}'...`);
 
       switch (collectionName) {
-        case 'workspaces':
+        case COLLECTIONS.WORKSPACES:
           // Attributes for workspaces collection
           await this._databases.createStringAttribute(databaseId, collectionId, 'name', 256, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'userId', 100, true);
@@ -135,28 +136,27 @@ export class AppwriteService {
           await this._databases.createStringAttribute(databaseId, collectionId, 'imageUrl', 1400000, false);
           break;
 
-        case 'members':
+        case COLLECTIONS.MEMBERS:
           // Attributes for members collection
           await this._databases.createStringAttribute(databaseId, collectionId, 'userId', 50, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'workspaceId', 50, true);
-          await this._databases.createEnumAttribute(databaseId, collectionId, 'role', ['ADMIN', 'MEMBER'], true);
+          await this._databases.createEnumAttribute(databaseId, collectionId, 'role', Object.values(MEMBER_ROLES), true);
           break;
 
-        case 'projects':
+        case COLLECTIONS.PROJECTS:
           // Attributes for projects collection
           await this._databases.createStringAttribute(databaseId, collectionId, 'name', 256, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'workspaceId', 50, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'imageUrl', 1400000, false);
           break;
 
-        case 'tasks':
+        case COLLECTIONS.TASKS:
           // Attributes for tasks collection
           await this._databases.createStringAttribute(databaseId, collectionId, 'name', 256, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'projectId', 50, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'executorId', 50, true);
           await this._databases.createStringAttribute(databaseId, collectionId, 'workspaceId', 50, true);
-          await this._databases.createEnumAttribute(databaseId, collectionId, 'status',
-            ['BACKLOG', 'TODO', 'IN_PROGRESS', 'IN_REVIEW', 'DONE'], true);
+          await this._databases.createEnumAttribute(databaseId, collectionId, 'status', Object.values(TASK_STATUS), true);
           await this._databases.createDatetimeAttribute(databaseId, collectionId, 'dueDate', true);
           await this._databases.createIntegerAttribute(databaseId, collectionId, 'position', true, 1000, 1000000);
           await this._databases.createStringAttribute(databaseId, collectionId, 'description', 10000, false);

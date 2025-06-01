@@ -67,8 +67,8 @@ npm run seed:drop
 
 This will:
 1. Prompt for Appwrite Project ID and API Key
-2. Delete the `app-organify-database` database with all collections
-3. Delete the `app-organify-images` storage bucket with all files
+2. Delete the `${DATABASE_NAME}` database with all collections
+3. Delete the `${STORAGE_NAME}` storage bucket with all files
 4. Delete all users (requires additional confirmation)
 
 ## Key Features

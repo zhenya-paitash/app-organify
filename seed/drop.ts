@@ -2,6 +2,7 @@ import { Client, Databases, Storage, Users, Query } from 'node-appwrite';
 import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import logger from './logger';
+import { DATABASE_NAME, STORAGE_NAME } from './config';
 
 /**
  * Class for dropping all Appwrite resources
@@ -83,14 +84,13 @@ class AppwriteDropper {
       logger.success('All collections deleted successfully');
     } catch (error) {
       logger.error(`Error deleting collections: ${error}`);
-      // Не прерываем выполнение при ошибке
     }
   }
 
   /**
    * Delete the database
    */
-  async deleteDatabase(name: string = 'app-organify-database'): Promise<void> {
+  async deleteDatabase(name: string = DATABASE_NAME): Promise<void> {
     if (!this.databases) {
       throw new Error('Databases service not initialized');
     }
@@ -105,7 +105,7 @@ class AppwriteDropper {
       const database = databases.databases.find(db => db.name === name);
 
       if (!database) {
-        logger.info(`Database "${name}" not found, continuing with other deletions`);
+        logger.info(`Database "${name}" not found`);
         return;
       }
 
@@ -118,7 +118,6 @@ class AppwriteDropper {
 
     } catch (error) {
       logger.error(`Error deleting database: ${error}`);
-      // Не прерываем выполнение, продолжаем с другими удалениями
     }
   }
 
@@ -156,14 +155,13 @@ class AppwriteDropper {
       logger.success('All files deleted successfully');
     } catch (error) {
       logger.error(`Error deleting files: ${error}`);
-      // Не прерываем выполнение при ошибке
     }
   }
 
   /**
    * Delete the storage bucket
    */
-  async deleteBucket(name: string = 'app-organify-images'): Promise<void> {
+  async deleteBucket(name: string = STORAGE_NAME): Promise<void> {
     if (!this.storage) {
       throw new Error('Storage service not initialized');
     }
@@ -178,7 +176,7 @@ class AppwriteDropper {
       const bucket = buckets.buckets.find(b => b.name === name);
 
       if (!bucket) {
-        logger.info(`Bucket "${name}" not found, continuing with other deletions`);
+        logger.info(`Bucket "${name}" not found`);
         return;
       }
 
@@ -191,7 +189,55 @@ class AppwriteDropper {
 
     } catch (error) {
       logger.error(`Error deleting bucket: ${error}`);
-      // Не прерываем выполнение, продолжаем с другими удалениями
+    }
+  }
+
+  /**
+   * Delete all users
+   */
+  async deleteAllUsers(): Promise<void> {
+    if (!this.users) {
+      throw new Error('Users service not initialized');
+    }
+
+    try {
+      logger.info('Deleting all users...');
+
+      // List all users (in batches to handle pagination)
+      let hasMore = true;
+      let offset = 0;
+      const limit = 100;
+      let deletedCount = 0;
+
+      while (hasMore) {
+        const users = await this.users.list([Query.limit(limit), Query.offset(offset)]);
+
+        if (users.users.length === 0) {
+          hasMore = false;
+          continue;
+        }
+
+        for (const user of users.users) {
+          try {
+            await this.users.delete(user.$id);
+            deletedCount++;
+            logger.success(`Deleted user: ${user.name || user.email} (${user.$id})`);
+          } catch (error) {
+            logger.error(`Failed to delete user ${user.email}: ${error}`);
+          }
+        }
+
+        offset += users.users.length;
+
+        // If we got fewer users than the limit, we've reached the end
+        if (users.users.length < limit) {
+          hasMore = false;
+        }
+      }
+
+      logger.success(`Deleted ${deletedCount} users in total`);
+    } catch (error) {
+      logger.error(`Error deleting users: ${error}`);
     }
   }
 
@@ -205,9 +251,9 @@ class AppwriteDropper {
       // Initialize Appwrite client
       await this.initialize();
 
-      // Упрощенное подтверждение (только одно)
+      // Упрощенное подтверждение
       const confirmation = await this.rl.question(
-        'WARNING: This will delete ALL app-organify-database data, images, and users. This action cannot be undone.\n' +
+        `WARNING: This will delete ALL ${DATABASE_NAME} data, ${STORAGE_NAME}, and users. This action cannot be undone.\n` +
         'Type "DELETE" to confirm: '
       );
 
@@ -218,56 +264,13 @@ class AppwriteDropper {
       }
 
       // Delete database
-      await this.deleteDatabase('app-organify-database');
+      await this.deleteDatabase();
 
       // Delete bucket
-      await this.deleteBucket('app-organify-images');
+      await this.deleteBucket();
 
-      // Delete users - больше не запрашиваем дополнительное подтверждение, т.к. уже подтвердили выше
-      try {
-        if (!this.users) {
-          throw new Error('Users service not initialized');
-        }
-
-        logger.info('Deleting all users...');
-
-        // List all users (in batches to handle pagination)
-        let hasMore = true;
-        let offset = 0;
-        const limit = 100;
-        let deletedCount = 0;
-
-        while (hasMore) {
-          const users = await this.users.list([Query.limit(limit), Query.offset(offset)]);
-
-          if (users.users.length === 0) {
-            hasMore = false;
-            continue;
-          }
-
-          for (const user of users.users) {
-            try {
-              await this.users.delete(user.$id);
-              deletedCount++;
-              logger.success(`Deleted user: ${user.name || user.email} (${user.$id})`);
-            } catch (error) {
-              logger.error(`Failed to delete user ${user.email}: ${error}`);
-            }
-          }
-
-          offset += users.users.length;
-
-          // If we got fewer users than the limit, we've reached the end
-          if (users.users.length < limit) {
-            hasMore = false;
-          }
-        }
-
-        logger.success(`Deleted ${deletedCount} users in total`);
-      } catch (error) {
-        logger.error(`Error deleting users: ${error}`);
-        // Не прерываем выполнение скрипта при ошибке удаления пользователей
-      }
+      // Delete users
+      await this.deleteAllUsers();
 
       logger.success('=========================================');
       logger.success('All data has been successfully deleted!');

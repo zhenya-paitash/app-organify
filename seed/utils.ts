@@ -1,3 +1,22 @@
+import { writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import logger from './logger';
+import { ENV_CONFIG } from './config';
+
+/**
+ * Interface for resource IDs used in .env file
+ */
+export interface ResourceIds {
+  projectId: string;
+  apiKey: string;
+  databaseId: string;
+  workspacesId: string;
+  membersId: string;
+  projectsId: string;
+  tasksId: string;
+  imagesBucketId: string;
+}
+
 /**
  * Utility class with helper methods
  */
@@ -39,5 +58,33 @@ export class Utils {
       result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
+  }
+
+  /**
+   * Generate .env.local file with resource IDs
+   * @param ids Resource IDs to include in the file
+   */
+  static generateEnvFile(ids: ResourceIds): void {
+    try {
+      logger.info('Creating .env.local file with resource IDs...');
+
+      const envContent = ENV_CONFIG.TEMPLATE
+        .replace('{{APP_URL}}', ENV_CONFIG.APP_URL)
+        .replace('{{APPWRITE_ENDPOINT}}', ENV_CONFIG.APPWRITE_ENDPOINT)
+        .replace('{{API_KEY}}', ids.apiKey)
+        .replace('{{PROJECT_ID}}', ids.projectId)
+        .replace('{{DATABASE_ID}}', ids.databaseId)
+        .replace('{{WORKSPACES_ID}}', ids.workspacesId)
+        .replace('{{MEMBERS_ID}}', ids.membersId)
+        .replace('{{PROJECTS_ID}}', ids.projectsId)
+        .replace('{{TASKS_ID}}', ids.tasksId)
+        .replace('{{IMAGES_BUCKET_ID}}', ids.imagesBucketId);
+
+      const envLocalPath = join(process.cwd(), '.env.local');
+      writeFileSync(envLocalPath, envContent);
+      logger.success(`Environment file created: ${envLocalPath}`);
+    } catch (error) {
+      logger.error(`Error creating .env file: ${error}`);
+    }
   }
 } 

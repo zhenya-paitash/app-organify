@@ -6,11 +6,10 @@ import { existsSync } from 'node:fs';
 import logger from './logger';
 import { AppwriteService } from './appwrite-service';
 import { CsvLoader } from './csv-loader';
-import { EnvManager } from './env-manager';
-import { Utils } from './utils';
-import { ResourceIds } from './types';
+import { Utils, ResourceIds } from './utils';
 import { Query } from 'node-appwrite';
 import { UserCSV, WorkspaceCSV, ProjectCSV, TaskCSV, MemberCSV } from './csv-loader';
+import { DATABASE_NAME, STORAGE_NAME, COLLECTIONS } from './config';
 
 /**
  * Main seeder class
@@ -80,56 +79,56 @@ export class Seeder {
     }
 
     // Create database
-    this.resourceIds.databaseId = await this.appwrite.createDatabase('app-organify-database');
+    this.resourceIds.databaseId = await this.appwrite.createDatabase(DATABASE_NAME);
 
     // Create collections
     this.resourceIds.workspacesId = await this.appwrite.createCollection(
       this.resourceIds.databaseId,
-      'workspaces'
+      COLLECTIONS.WORKSPACES
     );
 
     this.resourceIds.membersId = await this.appwrite.createCollection(
       this.resourceIds.databaseId,
-      'members'
+      COLLECTIONS.MEMBERS
     );
 
     this.resourceIds.projectsId = await this.appwrite.createCollection(
       this.resourceIds.databaseId,
-      'projects'
+      COLLECTIONS.PROJECTS
     );
 
     this.resourceIds.tasksId = await this.appwrite.createCollection(
       this.resourceIds.databaseId,
-      'tasks'
+      COLLECTIONS.TASKS
     );
 
     // Create collection attributes
     await this.appwrite.createCollectionAttributes(
       this.resourceIds.databaseId,
       this.resourceIds.workspacesId,
-      'workspaces'
+      COLLECTIONS.WORKSPACES
     );
 
     await this.appwrite.createCollectionAttributes(
       this.resourceIds.databaseId,
       this.resourceIds.membersId,
-      'members'
+      COLLECTIONS.MEMBERS
     );
 
     await this.appwrite.createCollectionAttributes(
       this.resourceIds.databaseId,
       this.resourceIds.projectsId,
-      'projects'
+      COLLECTIONS.PROJECTS
     );
 
     await this.appwrite.createCollectionAttributes(
       this.resourceIds.databaseId,
       this.resourceIds.tasksId,
-      'tasks'
+      COLLECTIONS.TASKS
     );
 
     // Create image bucket
-    this.resourceIds.imagesBucketId = await this.appwrite.createBucket('app-organify-images');
+    this.resourceIds.imagesBucketId = await this.appwrite.createBucket(STORAGE_NAME);
   }
 
   /**
@@ -160,8 +159,13 @@ export class Seeder {
             );
             logger.success(`Collection with ID ${collection.id} deleted`);
             this.resourceIds[collection.name as keyof ResourceIds] = '';
-          } catch (error) {
-            logger.error(`Error deleting collection with ID ${collection.id}: ${error}`);
+          } catch (error: any) {
+            // Если коллекция не существует, просто пропускаем
+            if (error.code === 404) {
+              logger.info(`Collection with ID ${collection.id} does not exist, skipping...`);
+            } else {
+              logger.error(`Error deleting collection with ID ${collection.id}: ${error}`);
+            }
           }
         }
       }
@@ -601,13 +605,10 @@ export class Seeder {
         throw new Error('Error connecting to Appwrite');
       }
 
-      // Initialize database and collections
-      await this.initDatabase();
-
-      // Delete existing collections for recreation
+      // Delete existing collections if they exist
       await this.deleteExistingCollections();
 
-      // Re-initialize collections
+      // Initialize database and collections
       await this.initDatabase();
 
       // Load data from CSV files
@@ -626,7 +627,7 @@ export class Seeder {
       await this.seedTasks(tasks);
 
       // Generate .env file
-      EnvManager.generateEnvFile(this.resourceIds);
+      Utils.generateEnvFile(this.resourceIds);
 
       logger.success('=========================================');
       logger.success('Seeding completed successfully!');
@@ -680,7 +681,7 @@ export class Seeder {
       }
 
       // Generate .env file
-      EnvManager.generateEnvFile(this.resourceIds);
+      Utils.generateEnvFile(this.resourceIds);
 
       logger.success('=========================================');
       logger.success('Database initialization completed successfully!');
