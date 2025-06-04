@@ -11,6 +11,8 @@
 
 **Organify** is a time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.
 
+![DEMO](public/demo.gif)
+
 ## Quick Start
 
 ```bash
