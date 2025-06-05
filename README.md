@@ -11,7 +11,8 @@
 
 **Organify** is a time management tool designed for developers and IT teams. It enables users to track, analyze, and optimize the time spent on tasks, facilitating efficient workflow organization.
 
-![DEMO](public/demo.gif)
+[![Static Badge](https://img.shields.io/badge/demo%20deploy%20organify%20project-181819?style=for-the-badge&logo=vercel&logoColor=181819&label=Vercel&labelColor=F2F8FC&link=https%3A%2F%2Fapp-organify.vercel.app)](https://app-organify.vercel.app) 
+<a href="https://app-organify.vercel.app"><img src="assets/demo.gif" width="100%"></a>
 
 ## Quick Start
 
@@ -57,9 +58,10 @@ bun run start
   - [OAuth Setup](#oauth-setup)
     - [GitHub OAuth](#github-oauth)
     - [Google OAuth](#google-oauth)
+- [Deploy](#deploy)
 - [Legal](#legal)
-  - [Privacy Policy](#privacy-policy)
-  - [Terms of Service](#terms-of-service)
+  - [Privacy Policy](docs/PRIVACY.md)
+  - [Terms of Service](docs/TERMS.md)
 - [License](#license)
 
 ## About
@@ -166,6 +168,8 @@ Organify aims to streamline the workflow of development teams by providing:
 - Efficient caching with TanStack Query for optimal performance
 - Automatic data synchronization across devices
 - Robust error handling and recovery mechanisms
+- Comprehensive database seeding system (see [seed/README.md](seed/README.md))
+- Custom cursor interaction module (original vanilla JS implementation in [docs/examples/cursor](docs/examples/cursor))
 
 #### User Experience
 - Responsive design that works seamlessly on all devices
@@ -402,6 +406,30 @@ NEXT_PUBLIC_APPWRITE_IMAGES_BUCKET_ID=your_bucket_id
    - Return to Appwrite Google provider settings
    - Paste the `Client ID` and `Client Secret`
    - Click **Update**
+
+</details>
+
+### Deploy
+
+<details>
+    <summary>Vercel Deployment</summary>
+    <br/>
+
+1. Edit `NEXT_PUBLIC_APP_URL` to your Vercel deployment URL (e.g., https://app-organify.vercel.app)
+
+2. Appwrite Configuration:
+   - Go to `Integrations` → `Add platform` → `Web`
+   - Change `Type` to Next.js
+   - Set `Hostname` to *.vercel.app
+   - Copy new `NEXT_PUBLIC_APPWRITE_ENDPOINT` with server = https://`fra`.cloud.appwrite.io/v1
+
+3. GitHub OAuth Setup:
+   - Set `Homepage URL` = https://app-organify.vercel.app
+   - Add `Authorization callback URL` = https://`fra`.cloud.appwrite.io/v1/oauth2...
+
+4. Google Cloud Client Setup:
+   - Add `Authorized JavaScript origins` = https://app-organify.vercel.app
+   - Add `Authorized redirect URIs` = https://`fra`.cloud.appwrite.io/v1/oauth2...
 
 </details>
 

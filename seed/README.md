@@ -82,6 +82,6 @@ This will:
   - Green: Success messages
   - Red: Error messages
   - Gray: Informational messages
-  - Blue: Input prompts
+  - Blue: Input prompts 
 - **Centralized Configuration**: All constants and configuration values are managed in `config.ts`
 - **Type Safety**: Strong typing for database collections, member roles, and task statuses
